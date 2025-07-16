@@ -1,6 +1,6 @@
-`Type` -- `Str` `Int` `Float`
-`Type` -- `Tau`
 `Type` -- `Inter` and `Union`
+`Type` -- `Tau`
+`Type` -- `TauStar`
 `checkSubtype` -- subtyping relation of non-recursive type
 `parseType`
 `stmt/`

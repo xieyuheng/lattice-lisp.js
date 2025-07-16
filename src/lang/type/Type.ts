@@ -2,6 +2,7 @@ export type Type =
   | TypeVar
   | Anything
   | Nothing
+| Bool
   | Str
   | Int
   | Float
@@ -13,6 +14,7 @@ export type Type =
 export type TypeVar = { kind: "TypeVar"; name: string }
 export type Anything = { kind: "Anything" }
 export type Nothing = { kind: "Nothing" }
+export type Bool = { kind: "Bool" }
 export type Str = { kind: "Str" }
 export type Int = { kind: "Int" }
 export type Float = { kind: "Float" }
@@ -36,6 +38,10 @@ export function Anything(): Anything {
 
 export function Nothing(): Nothing {
   return { kind: "Nothing" }
+}
+
+export function Bool(): Bool {
+  return { kind: "Bool" }
 }
 
 export function Str(): Str {

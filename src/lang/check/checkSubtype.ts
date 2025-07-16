@@ -12,9 +12,9 @@ export function checkSubtype(ctx: Ctx, targetType: Type, superType: Type): boole
   }
 
   if (
-    (targetType.kind === "Bool" && superType.kind === "Bool") |
-    (targetType.kind === "Str" && superType.kind === "Str") |
-    (targetType.kind === "Int" && superType.kind === "Int") |
+    (targetType.kind === "Bool" && superType.kind === "Bool") ||
+    (targetType.kind === "Str" && superType.kind === "Str") ||
+    (targetType.kind === "Int" && superType.kind === "Int") ||
     (targetType.kind === "Float" && superType.kind === "Float")
   ) {
     return true

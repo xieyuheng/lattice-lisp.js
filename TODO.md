@@ -1,5 +1,10 @@
-[type] `Type`
-[type] `assert-subtype` and `assert-not-subtype`
-[type] subtyping relation of non-recursive type
-[type] subtyping relation of recursive type
-[type] test equivalence defined by subtyping
+`Type` -- `Str` `Int` `Float`
+`Type` -- `Tau`
+`Type` -- `Inter` and `Union`
+`checkSubtype` -- subtyping relation of non-recursive type
+`parseType`
+`stmt/`
+`assert-subtype`
+`assert-not-subtype`
+`checkSubtype` -- subtyping relation of recursive type
+`checkEquivalent` -- test equivalent relation -- by antisymmetry of subtyping

@@ -1,5 +1,3 @@
-`checkSubtype` -- `Arrow`
-
 `checkSubtype` -- take `ctx` -- placeholder
 
 `parseType`

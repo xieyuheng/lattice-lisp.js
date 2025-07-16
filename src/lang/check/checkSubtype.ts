@@ -18,5 +18,12 @@ export function checkSubtype(targetType: Type, superType: Type): boolean {
     return true
   }
 
+  if (targetType.kind === "Arrow" && superType.kind === "Arrow") {
+    return (
+      checkSubtype(superType.argType, targetType.argType) &&
+      checkSubtype(targetType.retType, superType.retType)
+    )
+  }
+
   return false
 }

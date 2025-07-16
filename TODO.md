@@ -1,4 +1,3 @@
-`checkSubtype` -- primitives
 `checkSubtype` -- `Arrow`
 
 `checkSubtype` -- take `ctx` -- placeholder

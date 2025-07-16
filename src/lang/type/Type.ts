@@ -2,7 +2,7 @@ export type Type =
   | TypeVar
   | Anything
   | Nothing
-| Bool
+  | Bool
   | Str
   | Int
   | Float

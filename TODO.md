@@ -1,8 +1,8 @@
-`checkSubtype` -- take `ctx` -- placeholder
-
 `parseType`
 
 `stmt/`
+
+`parseStmt`
 
 `assert-subtype`
 `assert-not-subtype`

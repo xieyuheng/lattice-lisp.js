@@ -1,6 +1,8 @@
 import { type Type } from "../type/index.ts"
 
-export function checkSubtype(targetType: Type, superType: Type): boolean {
+type Ctx = {}
+
+export function checkSubtype(ctx: Ctx, targetType: Type, superType: Type): boolean {
   if (targetType.kind === "Nothing") {
     return true
   }
@@ -20,8 +22,8 @@ export function checkSubtype(targetType: Type, superType: Type): boolean {
 
   if (targetType.kind === "Arrow" && superType.kind === "Arrow") {
     return (
-      checkSubtype(superType.argType, targetType.argType) &&
-      checkSubtype(targetType.retType, superType.retType)
+      checkSubtype(ctx, superType.argType, targetType.argType) &&
+        checkSubtype(ctx, targetType.retType, superType.retType)
     )
   }
 

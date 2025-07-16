@@ -17,8 +17,8 @@ export type Str = { kind: "Str" }
 export type Int = { kind: "Int" }
 export type Float = { kind: "Float" }
 export type Arrow = { kind: "Arrow"; argType: Type; retType: Type }
-export type Union = { kind: "Union"; types: Array<Type> }
-export type Inter = { kind: "Inter"; types: Array<Type> }
+export type Union = { kind: "Union"; candidateTypes: Array<Type> }
+export type Inter = { kind: "Inter"; aspectTypes: Array<Type> }
 export type Tau = {
   kind: "Tau"
   elementTypes: Array<Type>
@@ -54,19 +54,19 @@ export function Arrow(argType: Type, retType: Type): Arrow {
   return { kind: "Arrow", argType, retType }
 }
 
-export function Union(types: Array<Type>): Union {
-  return { kind: "Union", types }
+export function Union(candidateTypes: Array<Type>): Union {
+  return { kind: "Union", candidateTypes }
 }
 
-export function Inter(types: Array<Type>): Inter {
-  return { kind: "Inter", types }
+export function Inter(aspectTypes: Array<Type>): Inter {
+  return { kind: "Inter", aspectTypes }
 }
 
-export function Inter(
+export function Tau(
   elementTypes: Array<Type>,
   attrTypes: Record<string, Type>,
   restType?: Type,
-): Inter {
+): Tau {
   return {
     kind: "Tau",
     elementTypes,

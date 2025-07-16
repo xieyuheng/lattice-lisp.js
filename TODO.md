@@ -1,12 +1,29 @@
-`checkSubtype` -- subtyping relation of non-recursive type
+`checkSubtype` -- primitives
+`checkSubtype` -- `Arrow`
+
+`checkSubtype` -- take `ctx` -- placeholder
 
 `parseType`
+
 `stmt/`
+
 `assert-subtype`
 `assert-not-subtype`
 
-setup test for examples
+setup test for examples -- TDD
 
-`checkSubtype` -- subtyping relation of recursive type
+`checkSubtype` -- `Tau`
+`checkSubtype` -- `Union`
+`checkSubtype` -- `Inter`
+
+`checkSubtype` -- has `ctx.history` and return `Report`
+
+- for error report in `assert-subtype`
+
+`define-type`
+
+`checkSubtype` -- take `ctx.trail`
+
+`checkSubtype` -- support recursive type
 
 `checkEquivalent` -- test equivalent relation -- by antisymmetry of subtyping

@@ -1,3 +1,6 @@
+`typeMatcher` -- `->`
+`typeMatcher` -- `tau` and `tau*`
+
 `Mod`
 `assertSubtype`
 `assertNotSubtype`

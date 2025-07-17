@@ -14,5 +14,13 @@ const typeMatcher: X.Matcher<Type> = X.matcherChoice<Type>([
   X.matcher("'int-t", () => Types.Int()),
   X.matcher("'float-t", () => Types.Float()),
 
+  X.matcher("(cons 'union types)", ({ types }) =>
+    Types.Union(X.dataToArray(types).map(matchType)),
+  ),
+
+  X.matcher("(cons 'inter types)", ({ types }) =>
+    Types.Inter(X.dataToArray(types).map(matchType)),
+  ),
+
   X.matcher("name", ({ name }) => Types.TypeVar(X.dataToString(name))),
 ])

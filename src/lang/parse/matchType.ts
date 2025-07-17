@@ -28,5 +28,9 @@ const typeMatcher: X.Matcher<Type> = X.matcherChoice<Type>([
     Types.Inter(X.dataToArray(types).map(matchType)),
   ),
 
+  X.matcher("(cons 'tau types)", ({ types }) =>
+    Types.Tau(X.dataToArray(types).map(matchType), {}),
+  ),
+
   X.matcher("name", ({ name }) => Types.TypeVar(X.dataToString(name))),
 ])

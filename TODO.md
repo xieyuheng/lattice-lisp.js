@@ -1,5 +1,3 @@
-`typeMatcher` -- `tau` -- only  `elementTypes`  for now
-
 `Mod`
 `assertSubtype`
 `assertNotSubtype`

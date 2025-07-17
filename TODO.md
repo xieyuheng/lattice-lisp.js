@@ -1,9 +1,6 @@
-`parseType`
-
 `stmt/`
-
 `parseStmt`
-
+`parseType`
 `assert-subtype`
 `assert-not-subtype`
 

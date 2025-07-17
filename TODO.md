@@ -1,7 +1,6 @@
-`parseStmt`
-`parseType`
-`assert-subtype`
-`assert-not-subtype`
+`Mod`
+`assertSubtype`
+`assertNotSubtype`
 
 setup test for examples -- TDD
 

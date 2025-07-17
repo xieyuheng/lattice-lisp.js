@@ -1,5 +1,4 @@
-`typeMatcher` -- `->`
-`typeMatcher` -- `tau` and `tau*`
+`typeMatcher` -- `tau` -- only  `elementTypes`  for now
 
 `Mod`
 `assertSubtype`
@@ -14,6 +13,9 @@ setup test for examples -- TDD
 `checkSubtype` -- has `ctx.history` and return `Report`
 
 - for error report in `assert-subtype`
+
+`typeMatcher` -- `tau` -- support `attrTypes`
+`typeMatcher` -- `tau*` -- support `restTypes`
 
 `define-type`
 

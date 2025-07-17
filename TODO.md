@@ -1,4 +1,3 @@
-`stmt/`
 `parseStmt`
 `parseType`
 `assert-subtype`

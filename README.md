@@ -1,6 +1,6 @@
 # lattice-lisp.js
 
-A lisp with structural subtype.
+A lisp with structural type system.
 
 ## Usages
 

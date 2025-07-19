@@ -1,4 +1,4 @@
-# x-lisp.js
+# lattice-lisp.js
 
 A lisp with structural subtype.
 
@@ -9,10 +9,10 @@ A lisp with structural subtype.
 Install it by the following command:
 
 ```sh
-npm install -g @xieyuheng/x-lisp.js
+npm install -g @xieyuheng/lattice-lisp.js
 ```
 
-The command-line program is called `x-lisp.js`.
+The command-line program is called `lattice-lisp.js`.
 
 ## Development
 

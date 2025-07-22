@@ -1,4 +1,3 @@
-rename `runCommand` to `RunCommand`
 `AssertSubtype` & `AssertNotSubtype` -- should only have two types
 `handleEffect` -- `AssertSubtype` & `AssertNotSubtype`
 `formaType`

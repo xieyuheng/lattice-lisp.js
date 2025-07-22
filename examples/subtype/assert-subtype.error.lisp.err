@@ -1,0 +1,3 @@
+[assert-subtype] fail:
+  lhs: anything-t
+  rhs: nothing-t

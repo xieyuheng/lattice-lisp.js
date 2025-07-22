@@ -1,5 +1,6 @@
-assert-subtype.error.lisp
 assert-not-subtype.error.lisp
+
+arrow.lisp
 
 `formaType` -- handle `Arrow` well
 `formaType` -- handle `Tau` well

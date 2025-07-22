@@ -22,7 +22,7 @@ export const RunCommand: Command = {
       await load(url)
     } catch (error) {
       if (error instanceof Error) {
-        console.error(error.message)
+        console.log(error.message)
         process.exit(1)
       }
 

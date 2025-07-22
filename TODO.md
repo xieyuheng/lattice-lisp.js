@@ -1,5 +1,3 @@
-arrow.lisp
-
 `formaType` -- handle `Arrow` well
 `formaType` -- handle `Tau` well
 

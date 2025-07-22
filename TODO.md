@@ -1,5 +1,3 @@
-assert-not-subtype.error.lisp
-
 arrow.lisp
 
 `formaType` -- handle `Arrow` well

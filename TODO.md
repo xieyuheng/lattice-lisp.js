@@ -1,8 +1,7 @@
-`Mod`
 `load`
-`execute` -- `assertSubtype`
-`execute` -- `assertNotSubtype`
 `run`
+`handleEffect` -- `AssertSubtype`
+`handleEffect` -- `AssertNotSubtype`
 
 setup test for examples -- TDD
 

@@ -1,7 +1,11 @@
-`handleEffect` -- `AssertSubtype` & `AssertNotSubtype`
 `formaType`
 
+`handleEffect` -- `AssertSubtype` & `AssertNotSubtype`
+
 setup test for examples -- TDD
+
+`formaType` -- handle `Arrow` well
+`formaType` -- handle `Tau` well
 
 `checkSubtype` -- `Tau`
 `checkSubtype` -- `Union`

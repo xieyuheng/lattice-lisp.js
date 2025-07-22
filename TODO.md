@@ -1,8 +1,4 @@
-`formaType`
-
-`handleEffect` -- `AssertSubtype` & `AssertNotSubtype`
-
-setup test for examples -- TDD
+setup test for examples -- just use bash
 
 `formaType` -- handle `Arrow` well
 `formaType` -- handle `Tau` well

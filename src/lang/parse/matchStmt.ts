@@ -8,11 +8,11 @@ export function matchStmt(data: X.Data): Stmt {
 }
 
 const stmtMatcher: X.Matcher<Stmt> = X.matcherChoice<Stmt>([
-  X.matcher("(cons 'assert-subtype types)", ({ types }) =>
-    Stmts.AssertSubtype(X.dataToArray(types).map(matchType)),
+  X.matcher("`(assert-subtype ,lhs ,rhs)", ({ lhs, rhs }) =>
+    Stmts.AssertSubtype(matchType(lhs), matchType(rhs)),
   ),
 
-  X.matcher("(cons 'assert-not-subtype types)", ({ types }) =>
-    Stmts.AssertNotSubtype(X.dataToArray(types).map(matchType)),
+  X.matcher("`(assert-not-subtype ,lhs ,rhs)", ({ lhs, rhs }) =>
+    Stmts.AssertNotSubtype(matchType(lhs), matchType(rhs)),
   ),
 ])

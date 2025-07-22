@@ -1,19 +1,19 @@
 import { type Type } from "../type/index.ts"
 
 export type Stmt = AssertSubtype | AssertNotSubtype
-export type AssertSubtype = { kind: "AssertSubtype"; types: Array<Type> }
-export type AssertNotSubtype = { kind: "AssertNotSubtype"; types: Array<Type> }
+export type AssertSubtype = { kind: "AssertSubtype"; lhs: Type, rhs: Type }
+export type AssertNotSubtype = { kind: "AssertNotSubtype"; lhs: Type, rhs: Type }
 
-export function AssertSubtype(types: Array<Type>): AssertSubtype {
+export function AssertSubtype(lhs: Type, rhs: Type): AssertSubtype {
   return {
     kind: "AssertSubtype",
-    types,
+    lhs, rhs,
   }
 }
 
-export function AssertNotSubtype(types: Array<Type>): AssertNotSubtype {
+export function AssertNotSubtype(lhs: Type, rhs: Type): AssertNotSubtype {
   return {
     kind: "AssertNotSubtype",
-    types,
+    lhs, rhs,
   }
 }

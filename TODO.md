@@ -1,4 +1,5 @@
-setup test for examples -- just use bash
+assert-subtype.error.lisp
+assert-not-subtype.error.lisp
 
 `formaType` -- handle `Arrow` well
 `formaType` -- handle `Tau` well

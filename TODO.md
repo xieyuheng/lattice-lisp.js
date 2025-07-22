@@ -1,7 +1,4 @@
-`load`
-`run`
-`handleEffect` -- `AssertSubtype`
-`handleEffect` -- `AssertNotSubtype`
+`handleEffect` -- `AssertSubtype` & `AssertNotSubtype`
 
 setup test for examples -- TDD
 

@@ -76,14 +76,14 @@ date: 2025-06-06
 注意，list 的 head 是 XML 的 tag 的作用，
 但 tag 只能是 string，而 list 的 head 可以是 list。
 
-我们不用 `list`，而是用 `make-list` 来构造 list，
-这样可以避免占用一个常用的变量名：
+我们不用 `list`，而是用 `tael` 来构造 list with attributes，
+这样可以避免占用一个常用的变量名，并且和 `tau` 呼应：
 
 ```scheme
-(make-list 'lambda (make-list 'x) 'x :span (make-list :start 0 :end 10))
+(tael 'lambda (tael 'x) 'x :span (tael :start 0 :end 10))
 ```
 
-并且让 `[...]` 展开成 `(make-list ...)`。
+并且让 `[...]` 展开成 `(tael ...)`。
 
 ```scheme
 ['lambda ['x] 'x :span [:start 0 :end 10]]
@@ -92,7 +92,7 @@ date: 2025-06-06
 这是从 shen-lang 学的，比如：
 
 ```scheme
-'(a b c) => ['a 'b 'c] => (make-list 'a 'b 'c)
+'(a b c) => ['a 'b 'c] => (tael 'a 'b 'c)
 ```
 
 注意，如果这样使用 `[...]`

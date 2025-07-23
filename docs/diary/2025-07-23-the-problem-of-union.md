@@ -9,13 +9,9 @@ date: 2025-07-23
 因为 lattice 中的 less 判断，可以转化为等式的判断。
 
 但是先 normalization 再判断相等，可能会指数爆炸。
-
 并且 normalization 也没法直接作用于递归定义的类型，需要 delay。
 
-实现子类型检查函数，主要的难点是 union，
-可能需要让函数带有当前 union 的所有参数。
-
-比如：
+union 遇到的难点：
 
 ```scheme
 (less (union (tau :x A :y C)
@@ -32,7 +28,7 @@ date: 2025-07-23
            (tau :x (union A B) :y C)))
 ```
 
-但是：
+但是反过来的判断：
 
 ```scheme
 (less (tau :x (union A B) :y C)
@@ -48,3 +44,9 @@ date: 2025-07-23
     (less (tau :x (union A B) :y C)
           (tau :x B :y C)))
 ```
+
+从 lattice theory 的角度讲，
+类型所构成的 lattice 应该是非常特殊的，
+union 作为 join 也是非常特殊的，
+应该是可以判断 subtype 关系的。
+还需要进一步研究。

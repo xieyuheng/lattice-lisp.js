@@ -14,85 +14,7 @@ date: 2025-06-06
 # Design
 
 用 `tau` 来声明形如 list 的 structural type。
-
-```scheme
-(define exp-t (union var-t int-t prim-t fn-t ap-t let-t))
-(define var-t symbol-t)
-(define let-t (tau 'let (list-t (tau symbol-t exp-t)) . (list-t exp-t)))
-(define fn-t (tau 'lambda (list-t symbol-t) . (list-t exp-t)))
-(define ap-t (tau exp-t . (list-t exp-t)))
-(define program-t (tau 'program info-t . (list-t exp-t)))
-```
-
-上面的 `(tau 'lambda (list-t symbol-t) . (list-t exp-t))` 有歧义，
-因为按照 `.` 的意义，
-它会被解析为 `(tau 'lambda (list-t symbol-t) list-t exp-t)`。
-所以不能把 `.` 解析为 list 的 cons。
-
-但是我选择完全放弃用 cons 实现 list，
-而是要求 list 的最后一个 cdr 必须是 null。
-实现 list 的时候，可以直接用 array 或者 list of cache sized-array。
-并且用 regular expression 来描述 list 的类型，
-以避免上面提到的用 `.` 表示 rest 的问题。
-
-在 `tau` 中 `one-or-more` 和 `zero-or-more` 有特殊意义。
-
-```scheme
-(define exp-t (union var-t int-t prim-t fn-t ap-t let-t))
-(define var-t symbol-t)
-(define let-t (tau 'let (list-t (tau symbol-t exp-t)) (one-or-more exp-t)))
-(define fn-t (tau 'lambda (list-t symbol-t) (one-or-more exp-t)))
-(define ap-t (tau exp-t (zero-or-more exp-t)))
-(define program-t (tau 'program info-t (one-or-more exp-t)))
-```
-
-此时，我们可以描述 `tau` 类数据的 structural type 为：
-
-```scheme
-(define tau-t (tau 'tau (zero-or-more tau-pattern-t)))
-(define tau-pattern-t
-  (union (tau 'one-or-more exp-t)
-         (tau 'zero-or-more exp-t)
-         exp-t))
-```
-
-在 type 中使用 regular expression 是可以的，
-但是在 pattern 中没法使用 regular expression。
-然而 type 与 pattern 应该是能够相互对应的。
-所以上面的设计可能不对。
-
-也许就应该模仿 clojure，不给 `.` 以特殊解释 lisp。
-为了避免所出现的 `.` 让 lisper 误会，用 `&` 表述 rest。
-
-```scheme
-(claim list-length
-  (nu (A) (-> (list-t A) integer-t)))
-(define (list-length list)
-  (match list
-    ([] 0)
-    ([head & tail]
-     (add1 (list-length tail)))))
-```
-
-```scheme
-(define exp-t (union var-t int-t prim-t fn-t ap-t let-t))
-(define var-t symbol-t)
-(define let-t (tau 'let (list-t (tau symbol-t exp-t)) & (list-t exp-t)))
-(define fn-t (tau 'lambda (list-t symbol-t) & (list-t exp-t)))
-(define ap-t (tau exp-t & (list-t exp-t)))
-(define program-t (tau 'program info-t & (list-t exp-t)))
-```
-
-但是这样会导致我们没法用 tau 描述 `tau` 类表达式的 structural type，
-反而是需要 `zero-or-more` 才能表达这种类型的数据：
-
-```scheme
-(define tau-t
-  (union (tau 'tau (zero-or-more exp-t))
-         (tau 'tau (zero-or-more exp-t) '& exp-t)))
-```
-
-也许应该用 `tau*` 类似 scheme 的 `cons*` 和 pie 的 `->`：
+用 `tau*` 类似 scheme 的 `cons*` 和 pie 的 `->`：
 
 ```scheme
 (define exp-t (union var-t int-t prim-t fn-t ap-t let-t))
@@ -102,8 +24,6 @@ date: 2025-06-06
 (define ap-t (tau* exp-t (list-t exp-t)))
 (define program-t (tau* 'program info-t (list-t exp-t)))
 ```
-
-感觉这才是正解！
 
 在 pattern 中也许可以直接使用 `cons`：
 
@@ -247,3 +167,105 @@ list 中的两个元素是 symbol 还是 bool 是有歧义的。
 
 但是由于我们把 symbol 和 string 融合了，
 所以如果需要还是可以写出来 `"#t"`。
+
+# Appendix A: The Design of tau
+
+## Using dot
+
+用 `tau` 来声明形如 list 的 structural type。
+
+```scheme
+(define exp-t (union var-t int-t prim-t fn-t ap-t let-t))
+(define var-t symbol-t)
+(define let-t (tau 'let (list-t (tau symbol-t exp-t)) . (list-t exp-t)))
+(define fn-t (tau 'lambda (list-t symbol-t) . (list-t exp-t)))
+(define ap-t (tau exp-t . (list-t exp-t)))
+(define program-t (tau 'program info-t . (list-t exp-t)))
+```
+
+上面的 `(tau 'lambda (list-t symbol-t) . (list-t exp-t))` 有歧义，
+因为按照 `.` 的意义，
+它会被解析为 `(tau 'lambda (list-t symbol-t) list-t exp-t)`。
+所以不能把 `.` 解析为 list 的 cons。
+
+但是我选择完全放弃用 cons 实现 list，
+而是要求 list 的最后一个 cdr 必须是 null。
+实现 list 的时候，可以直接用 array 或者 list of cache sized-array。
+并且用 regular expression 来描述 list 的类型，
+以避免上面提到的用 `.` 表示 rest 的问题。
+
+## Using regular expression
+
+在 `tau` 中 `one-or-more` 和 `zero-or-more` 有特殊意义。
+
+```scheme
+(define exp-t (union var-t int-t prim-t fn-t ap-t let-t))
+(define var-t symbol-t)
+(define let-t (tau 'let (list-t (tau symbol-t exp-t)) (one-or-more exp-t)))
+(define fn-t (tau 'lambda (list-t symbol-t) (one-or-more exp-t)))
+(define ap-t (tau exp-t (zero-or-more exp-t)))
+(define program-t (tau 'program info-t (one-or-more exp-t)))
+```
+
+此时，我们可以描述 `tau` 类数据的 structural type 为：
+
+```scheme
+(define tau-t (tau 'tau (zero-or-more tau-pattern-t)))
+(define tau-pattern-t
+  (union (tau 'one-or-more exp-t)
+         (tau 'zero-or-more exp-t)
+         exp-t))
+```
+
+在 type 中使用 regular expression 是可以的，
+但是在 pattern 中没法使用 regular expression。
+然而 type 与 pattern 应该是能够相互对应的。
+所以上面的设计可能不对。
+
+## Be like clojure
+
+也许就应该模仿 clojure，不给 `.` 以特殊解释 lisp。
+为了避免所出现的 `.` 让 lisper 误会，用 `&` 表述 rest。
+
+```scheme
+(claim list-length
+  (nu (A) (-> (list-t A) integer-t)))
+(define (list-length list)
+  (match list
+    ([] 0)
+    ([head & tail]
+     (add1 (list-length tail)))))
+```
+
+```scheme
+(define exp-t (union var-t int-t prim-t fn-t ap-t let-t))
+(define var-t symbol-t)
+(define let-t (tau 'let (list-t (tau symbol-t exp-t)) & (list-t exp-t)))
+(define fn-t (tau 'lambda (list-t symbol-t) & (list-t exp-t)))
+(define ap-t (tau exp-t & (list-t exp-t)))
+(define program-t (tau 'program info-t & (list-t exp-t)))
+```
+
+但是这样会导致我们没法用 tau 描述 `tau` 类表达式的 structural type，
+反而是需要 `zero-or-more` 才能表达这种类型的数据：
+
+```scheme
+(define tau-t
+  (union (tau 'tau (zero-or-more exp-t))
+         (tau 'tau (zero-or-more exp-t) '& exp-t)))
+```
+
+## Using tau*
+
+也许应该用 `tau*` 类似 scheme 的 `cons*` 和 pie 的 `->`：
+
+```scheme
+(define exp-t (union var-t int-t prim-t fn-t ap-t let-t))
+(define var-t symbol-t)
+(define let-t (tau* 'let (list-t (tau symbol-t exp-t)) (list-t exp-t)))
+(define fn-t (tau* 'lambda (list-t symbol-t) (list-t exp-t)))
+(define ap-t (tau* exp-t (list-t exp-t)))
+(define program-t (tau* 'program info-t (list-t exp-t)))
+```
+
+感觉这才是正解！

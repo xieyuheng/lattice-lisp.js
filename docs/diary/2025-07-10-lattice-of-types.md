@@ -3,8 +3,6 @@ title: lattice of types
 date: 2025-07-10
 ---
 
-# lattice presentation
-
 用格展示（lattice presentation），
 来处理 lattice-lisp 中的类型。
 
@@ -84,80 +82,3 @@ inter of two record types is record type：
 (== (inter (tau :x A) (tau :c B))
     (tau :x A :c B))
 ```
-
-# 分配律
-
-类比 `mul` distribute over `add`：
-
-```scheme
-(== (mul x (add y z))
-    (add (mul x y) (mul x z)))
-```
-
-有 `inter` distribute over `union`：
-
-```scheme
-(== (inter A (union B C))
-    (union (inter A B) (inter A C)))
-```
-
-用 `tau` 来验证：
-
-```scheme
-(== (inter (tau :x A) (union (tau :y B) (tau :y C)))
-    (union (inter (tau :x A) (tau :y B))
-           (inter (tau :x A) (tau :y C))))
-```
-
-因为 `tau` 对 record 而言等价于 `inter`，
-所以也可以说是 record `tau` distribute over `union`：
-
-```scheme
-(== (tau :x A :y (union B C))
-    (union (tau :x A :y B)
-           (tau :x A :y C)))
-```
-
-反过来 的 `union` distribute over `inter` 呢？
-
-```scheme
-(== (union A (inter B C))
-    (inter (union A B) (union A C)))
-```
-
-用 `tau` 来验证：
-
-```scheme
-(== (union A (inter (tau :x B) (tau :y C)))
-    (inter (union A (tau :x B))
-           (union A (tau :x C))))
-```
-
-或者：
-
-```scheme
-(== (union A (tau :x B :y C))
-    (inter (union A (tau :x B))
-           (union A (tau :y C))))
-```
-
-注意 `(union A (tau :x B))`
-并不等于`(tau :x (union A B))`。
-
-好像不能用 record `tau` 来研验证 `union` 相关的规则，
-因为 `union` 和 record 并没有交互。
-
-```scheme
-(union (tau :x A1 :y B1 :z C1)
-       (tau :x A2 :y B2 :z C2))
-```
-
-只有在所有 field 都相同，只有一个 field 不同的时候才有交互：
-
-```scheme
-(== (union (tau :x A1 :y B :z C)
-           (tau :x A2 :y B :z C))
-    (tau :x (union A1 A2) :y B :z C))
-```
-
-这种奇怪的属性如何体现在 lattice theory 中呢？

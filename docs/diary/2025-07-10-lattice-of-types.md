@@ -159,3 +159,5 @@ inter of two record types is record type：
            (tau :x A2 :y B :z C))
     (tau :x (union A1 A2) :y B :z C))
 ```
+
+这种奇怪的属性如何体现在 lattice theory 中呢？

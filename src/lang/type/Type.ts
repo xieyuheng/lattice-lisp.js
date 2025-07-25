@@ -1,7 +1,7 @@
 export type Type =
   | TypeVar
-  | Anything
-  | Nothing
+  | AnythingType
+  | NothingType
   | Bool
   | Str
   | Int
@@ -12,8 +12,8 @@ export type Type =
   | Tau
 
 export type TypeVar = { kind: "TypeVar"; name: string }
-export type Anything = { kind: "Anything" }
-export type Nothing = { kind: "Nothing" }
+export type AnythingType = { kind: "AnythingType" }
+export type NothingType = { kind: "NothingType" }
 export type Bool = { kind: "Bool" }
 export type Str = { kind: "Str" }
 export type Int = { kind: "Int" }
@@ -32,12 +32,12 @@ export function TypeVar(name: string): TypeVar {
   return { kind: "TypeVar", name }
 }
 
-export function Anything(): Anything {
-  return { kind: "Anything" }
+export function AnythingType(): AnythingType {
+  return { kind: "AnythingType" }
 }
 
-export function Nothing(): Nothing {
-  return { kind: "Nothing" }
+export function NothingType(): NothingType {
+  return { kind: "NothingType" }
 }
 
 export function Bool(): Bool {

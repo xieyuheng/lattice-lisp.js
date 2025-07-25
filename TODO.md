@@ -1,3 +1,6 @@
+> add `Type` postfix to basic types
+
+add `ListType` to `Type`
 `checkSubtype` -- `Tau`
 `checkSubtype` -- `Union`
 `checkSubtype` -- `Inter`

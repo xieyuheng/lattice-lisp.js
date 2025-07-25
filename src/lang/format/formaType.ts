@@ -6,11 +6,11 @@ export function formaType(type: Type): string {
       return type.name
     }
 
-    case "Anything": {
+    case "AnythingType": {
       return "anything-t"
     }
 
-    case "Nothing": {
+    case "NothingType": {
       return "nothing-t"
     }
 

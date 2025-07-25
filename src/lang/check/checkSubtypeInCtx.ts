@@ -6,11 +6,11 @@ export function checkSubtypeInCtx(
   targetType: Type,
   superType: Type,
 ): boolean {
-  if (targetType.kind === "Nothing") {
+  if (targetType.kind === "NothingType") {
     return true
   }
 
-  if (superType.kind === "Anything") {
+  if (superType.kind === "AnythingType") {
     return true
   }
 

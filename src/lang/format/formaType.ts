@@ -26,7 +26,7 @@ export function formaType(type: Type): string {
       return "int-t"
     }
 
-    case "Float": {
+    case "FloatType": {
       return "float-t"
     }
 

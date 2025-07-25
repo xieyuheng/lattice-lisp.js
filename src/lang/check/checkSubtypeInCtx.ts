@@ -18,7 +18,7 @@ export function checkSubtypeInCtx(
     (targetType.kind === "BoolType" && superType.kind === "BoolType") ||
     (targetType.kind === "StringType" && superType.kind === "StringType") ||
     (targetType.kind === "IntType" && superType.kind === "IntType") ||
-    (targetType.kind === "Float" && superType.kind === "Float")
+    (targetType.kind === "FloatType" && superType.kind === "FloatType")
   ) {
     return true
   }

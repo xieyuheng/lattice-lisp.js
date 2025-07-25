@@ -1,9 +1,3 @@
-> add `Type` postfix to basic types
-
-ambr Int IntType
-ambr Float FloatType
-
-add `ListType` to `Type`
 `checkSubtype` -- `Tau`
 `checkSubtype` -- `Union`
 `checkSubtype` -- `Inter`
@@ -11,6 +5,7 @@ add `ListType` to `Type`
 - for error report in `assert-subtype`
 `typeMatcher` -- `tau` -- support `attrTypes`
 `typeMatcher` -- `tau*` -- support `restTypes`
+add `ListType` to `Type`
 `define-type`
 `checkSubtype` -- take `ctx.trail`
 `checkSubtype` -- support recursive type

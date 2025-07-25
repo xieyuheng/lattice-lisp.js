@@ -5,7 +5,7 @@ export type Type =
   | BoolType
   | StringType
   | IntType
-  | Float
+  | FloatType
   | Arrow
   | Union
   | IntTypeer
@@ -17,7 +17,7 @@ export type NothingType = { kind: "NothingType" }
 export type BoolType = { kind: "BoolType" }
 export type StringType = { kind: "StringType" }
 export type IntType = { kind: "IntType" }
-export type Float = { kind: "Float" }
+export type FloatType = { kind: "FloatType" }
 export type Arrow = { kind: "Arrow"; argType: Type; retType: Type }
 export type Union = { kind: "Union"; candidateTypes: Array<Type> }
 export type IntTypeer = { kind: "IntTypeer"; aspectTypes: Array<Type> }
@@ -52,8 +52,8 @@ export function IntType(): IntType {
   return { kind: "IntType" }
 }
 
-export function Float(): Float {
-  return { kind: "Float" }
+export function FloatType(): FloatType {
+  return { kind: "FloatType" }
 }
 
 export function Arrow(argType: Type, retType: Type): Arrow {

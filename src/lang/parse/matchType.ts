@@ -12,7 +12,7 @@ const typeMatcher: X.Matcher<Type> = X.matcherChoice<Type>([
   X.matcher("'bool-t", () => Types.BoolType()),
   X.matcher("'string-t", () => Types.StringType()),
   X.matcher("'int-t", () => Types.IntType()),
-  X.matcher("'float-t", () => Types.Float()),
+  X.matcher("'float-t", () => Types.FloatType()),
 
   X.matcher("(cons '-> types)", ({ types }) =>
     X.dataToArray(types)

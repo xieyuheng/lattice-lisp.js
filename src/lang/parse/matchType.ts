@@ -11,7 +11,7 @@ const typeMatcher: X.Matcher<Type> = X.matcherChoice<Type>([
   X.matcher("'nothing-t", () => Types.NothingType()),
   X.matcher("'bool-t", () => Types.BoolType()),
   X.matcher("'string-t", () => Types.StringType()),
-  X.matcher("'int-t", () => Types.Int()),
+  X.matcher("'int-t", () => Types.IntType()),
   X.matcher("'float-t", () => Types.Float()),
 
   X.matcher("(cons '-> types)", ({ types }) =>
@@ -25,7 +25,7 @@ const typeMatcher: X.Matcher<Type> = X.matcherChoice<Type>([
   ),
 
   X.matcher("(cons 'inter types)", ({ types }) =>
-    Types.Inter(X.dataToArray(types).map(matchType)),
+    Types.IntTypeer(X.dataToArray(types).map(matchType)),
   ),
 
   X.matcher("(cons 'tau types)", ({ types }) =>

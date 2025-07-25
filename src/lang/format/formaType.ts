@@ -22,7 +22,7 @@ export function formaType(type: Type): string {
       return "string-t"
     }
 
-    case "Int": {
+    case "IntType": {
       return "int-t"
     }
 
@@ -41,7 +41,7 @@ export function formaType(type: Type): string {
       return `(union ${candidateTypes.join(' ')})`
     }
 
-    case "Inter": {
+    case "IntTypeer": {
       const aspectTypes = type.aspectTypes.map(formaType)
       return `(inter ${aspectTypes.join(' ')})`
     }

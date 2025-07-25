@@ -4,11 +4,11 @@ export type Type =
   | NothingType
   | BoolType
   | StringType
-  | Int
+  | IntType
   | Float
   | Arrow
   | Union
-  | Inter
+  | IntTypeer
   | Tau
 
 export type TypeVar = { kind: "TypeVar"; name: string }
@@ -16,11 +16,11 @@ export type AnythingType = { kind: "AnythingType" }
 export type NothingType = { kind: "NothingType" }
 export type BoolType = { kind: "BoolType" }
 export type StringType = { kind: "StringType" }
-export type Int = { kind: "Int" }
+export type IntType = { kind: "IntType" }
 export type Float = { kind: "Float" }
 export type Arrow = { kind: "Arrow"; argType: Type; retType: Type }
 export type Union = { kind: "Union"; candidateTypes: Array<Type> }
-export type Inter = { kind: "Inter"; aspectTypes: Array<Type> }
+export type IntTypeer = { kind: "IntTypeer"; aspectTypes: Array<Type> }
 export type Tau = {
   kind: "Tau"
   elementTypes: Array<Type>
@@ -48,8 +48,8 @@ export function StringType(): StringType {
   return { kind: "StringType" }
 }
 
-export function Int(): Int {
-  return { kind: "Int" }
+export function IntType(): IntType {
+  return { kind: "IntType" }
 }
 
 export function Float(): Float {
@@ -64,8 +64,8 @@ export function Union(candidateTypes: Array<Type>): Union {
   return { kind: "Union", candidateTypes }
 }
 
-export function Inter(aspectTypes: Array<Type>): Inter {
-  return { kind: "Inter", aspectTypes }
+export function IntTypeer(aspectTypes: Array<Type>): IntTypeer {
+  return { kind: "IntTypeer", aspectTypes }
 }
 
 export function Tau(

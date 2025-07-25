@@ -38,17 +38,17 @@ export function formaType(type: Type): string {
 
     case "Union": {
       const candidateTypes = type.candidateTypes.map(formaType)
-      return `(union ${candidateTypes.join(' ')})`
+      return `(union ${candidateTypes.join(" ")})`
     }
 
     case "Inter": {
       const aspectTypes = type.aspectTypes.map(formaType)
-      return `(inter ${aspectTypes.join(' ')})`
+      return `(inter ${aspectTypes.join(" ")})`
     }
 
     case "Tau": {
       const elementTypes = type.elementTypes.map(formaType)
-      return `(tau ${elementTypes.join(' ')})`
+      return `(tau ${elementTypes.join(" ")})`
     }
   }
 }

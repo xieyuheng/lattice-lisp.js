@@ -1,8 +1,8 @@
 import dedent from "dedent"
 import { checkSubtype } from "../check/checkSubtype.ts"
+import { formaType } from "../format/index.ts"
 import type { Mod } from "../mod/index.ts"
 import type { Stmt } from "../stmt/index.ts"
-import { formaType } from "../format/index.ts"
 
 export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
   if (stmt.kind === "AssertSubtype") {

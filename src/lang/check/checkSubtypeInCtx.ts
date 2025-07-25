@@ -30,5 +30,21 @@ export function checkSubtypeInCtx(
     )
   }
 
+  if (targetType.kind === "Tau" && superType.kind === "Tau") {
+    if (targetType.elementTypes.length !== superType.elementTypes.length) {
+      return false
+    }
+
+    for (const index of targetType.elementTypes.keys()) {
+      const targetElementType = targetType.elementTypes[index]
+      const superElementType = superType.elementTypes[index]
+      if (!checkSubtypeInCtx(ctx, targetElementType, superElementType)) {
+        return false
+      }
+    }
+
+    return true
+  }
+
   return false
 }

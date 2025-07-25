@@ -1,12 +1,17 @@
-ambr Inter Inter
-`checkSubtype` -- `Tau`
 `checkSubtype` -- `Union`
 `checkSubtype` -- `Inter`
+
 `checkSubtype` -- has `ctx.history` and return `Report`
 - for error report in `assert-subtype`
+
 `typeMatcher` -- `tau` -- support `attrTypes`
 `typeMatcher` -- `tau*` -- support `restTypes`
+
+`checkSubtype` -- `Tau` -- `attrTypes`
+
 add `ListType` to `Type`
+`checkSubtype` -- `Tau` -- `restTypes`
+
 `define-type`
 `checkSubtype` -- take `ctx.trail`
 `checkSubtype` -- support recursive type

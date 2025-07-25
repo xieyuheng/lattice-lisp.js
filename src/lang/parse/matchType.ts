@@ -9,8 +9,8 @@ export function matchType(data: X.Data): Type {
 const typeMatcher: X.Matcher<Type> = X.matcherChoice<Type>([
   X.matcher("'anything-t", () => Types.AnythingType()),
   X.matcher("'nothing-t", () => Types.NothingType()),
-  X.matcher("'bool-t", () => Types.Bool()),
-  X.matcher("'string-t", () => Types.Str()),
+  X.matcher("'bool-t", () => Types.BoolType()),
+  X.matcher("'string-t", () => Types.StringType()),
   X.matcher("'int-t", () => Types.Int()),
   X.matcher("'float-t", () => Types.Float()),
 

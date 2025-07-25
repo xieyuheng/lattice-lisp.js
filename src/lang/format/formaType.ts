@@ -14,11 +14,11 @@ export function formaType(type: Type): string {
       return "nothing-t"
     }
 
-    case "Bool": {
+    case "BoolType": {
       return "bool-t"
     }
 
-    case "Str": {
+    case "StringType": {
       return "string-t"
     }
 

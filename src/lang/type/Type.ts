@@ -2,8 +2,8 @@ export type Type =
   | TypeVar
   | AnythingType
   | NothingType
-  | Bool
-  | Str
+  | BoolType
+  | StringType
   | Int
   | Float
   | Arrow
@@ -14,8 +14,8 @@ export type Type =
 export type TypeVar = { kind: "TypeVar"; name: string }
 export type AnythingType = { kind: "AnythingType" }
 export type NothingType = { kind: "NothingType" }
-export type Bool = { kind: "Bool" }
-export type Str = { kind: "Str" }
+export type BoolType = { kind: "BoolType" }
+export type StringType = { kind: "StringType" }
 export type Int = { kind: "Int" }
 export type Float = { kind: "Float" }
 export type Arrow = { kind: "Arrow"; argType: Type; retType: Type }
@@ -40,12 +40,12 @@ export function NothingType(): NothingType {
   return { kind: "NothingType" }
 }
 
-export function Bool(): Bool {
-  return { kind: "Bool" }
+export function BoolType(): BoolType {
+  return { kind: "BoolType" }
 }
 
-export function Str(): Str {
-  return { kind: "Str" }
+export function StringType(): StringType {
+  return { kind: "StringType" }
 }
 
 export function Int(): Int {

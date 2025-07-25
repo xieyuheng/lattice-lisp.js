@@ -15,8 +15,8 @@ export function checkSubtypeInCtx(
   }
 
   if (
-    (targetType.kind === "Bool" && superType.kind === "Bool") ||
-    (targetType.kind === "Str" && superType.kind === "Str") ||
+    (targetType.kind === "BoolType" && superType.kind === "BoolType") ||
+    (targetType.kind === "StringType" && superType.kind === "StringType") ||
     (targetType.kind === "Int" && superType.kind === "Int") ||
     (targetType.kind === "Float" && superType.kind === "Float")
   ) {

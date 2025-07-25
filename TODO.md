@@ -1,5 +1,8 @@
 > add `Type` postfix to basic types
 
+ambr Int IntType
+ambr Float FloatType
+
 add `ListType` to `Type`
 `checkSubtype` -- `Tau`
 `checkSubtype` -- `Union`

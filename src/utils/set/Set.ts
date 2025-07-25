@@ -6,7 +6,7 @@ export function setUnionMany<T>(setArray: Array<Set<T>>): Set<T> {
   return setArray.reduceRight((result, s) => setUnion(result, s), new Set())
 }
 
-export function setIntTypeersection<T>(
+export function setIntersection<T>(
   x: ReadonlySet<T>,
   y: ReadonlySet<T>,
 ): Set<T> {
@@ -35,7 +35,7 @@ export function setSymmetricDifference<T>(
   x: ReadonlySet<T>,
   y: ReadonlySet<T>,
 ): Set<T> {
-  return setDifference(setUnion(x, y), setIntTypeersection(x, y))
+  return setDifference(setUnion(x, y), setIntersection(x, y))
 }
 
 export function setIsSubsetOf<T>(

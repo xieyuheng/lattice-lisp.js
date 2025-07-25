@@ -41,7 +41,7 @@ export function formaType(type: Type): string {
       return `(union ${candidateTypes.join(' ')})`
     }
 
-    case "IntTypeer": {
+    case "Inter": {
       const aspectTypes = type.aspectTypes.map(formaType)
       return `(inter ${aspectTypes.join(' ')})`
     }

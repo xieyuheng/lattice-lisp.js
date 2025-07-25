@@ -1,3 +1,4 @@
+ambr Inter Inter
 `checkSubtype` -- `Tau`
 `checkSubtype` -- `Union`
 `checkSubtype` -- `Inter`

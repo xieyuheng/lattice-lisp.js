@@ -8,7 +8,7 @@ export type Type =
   | FloatType
   | Arrow
   | Union
-  | IntTypeer
+  | Inter
   | Tau
 
 export type TypeVar = { kind: "TypeVar"; name: string }
@@ -20,7 +20,7 @@ export type IntType = { kind: "IntType" }
 export type FloatType = { kind: "FloatType" }
 export type Arrow = { kind: "Arrow"; argType: Type; retType: Type }
 export type Union = { kind: "Union"; candidateTypes: Array<Type> }
-export type IntTypeer = { kind: "IntTypeer"; aspectTypes: Array<Type> }
+export type Inter = { kind: "Inter"; aspectTypes: Array<Type> }
 export type Tau = {
   kind: "Tau"
   elementTypes: Array<Type>
@@ -64,8 +64,8 @@ export function Union(candidateTypes: Array<Type>): Union {
   return { kind: "Union", candidateTypes }
 }
 
-export function IntTypeer(aspectTypes: Array<Type>): IntTypeer {
-  return { kind: "IntTypeer", aspectTypes }
+export function Inter(aspectTypes: Array<Type>): Inter {
+  return { kind: "Inter", aspectTypes }
 }
 
 export function Tau(

@@ -1,3 +1,12 @@
+> we need normal form for type
+
+what kind of normal form to use?
+
+- inter normal form
+- union normal form
+
+`checkSubtype` -- `Union` -- handle single attribute `Tau`
+
 # tau*
 
 `checkSubtype` -- `Tau` -- handle `Tau` as `restTypes`

@@ -84,6 +84,13 @@ inter of two record types is record type：
            (tau :x A :y C)))
 ```
 
+注意，上面要求我们能做这样的转换：
+
+```scheme
+(union (tau :y B) (tau :y C))
+= (tau :y (union B C))
+```
+
 反过来 的 `union` distribute over `inter` 呢？
 
 ```scheme
@@ -96,7 +103,7 @@ inter of two record types is record type：
 ```scheme
 (== (union A (inter (tau :x B) (tau :y C)))
     (inter (union A (tau :x B))
-           (union A (tau :x C))))
+           (union A (tau :y C))))
 ```
 
 或者：
@@ -137,3 +144,69 @@ inter of two record types is record type：
 上面遇到的这个 union type 的 edge case，
 让我认为可能需要对做完整的 normalization，
 但是其实可能只需要针对这个 edge case 来做 normalization。
+
+如果有：
+
+```scheme
+(union (tau :y B) (tau :y C))
+= (tau :y (union B C))
+```
+
+那么就有：
+
+```scheme
+(union (tau :x A :y B) (tau :x A :y C))
+= (union (inter (tau :x A) (tau :y B))
+         (inter (tau :x A) (tau :y C)))
+= (inter (tau :x A) (union (tau :y B) (tau :y C)))
+= (inter (tau :x A) (tau :y (union B C)))
+= (tau :x A :y (union B C))
+```
+
+以带有单个 attribute 的 tau 为生成元，尝试两种 normal-form。
+
+union-normal-form：
+
+```scheme
+(tau :x A :y (union B C))
+= (union (inter (tau :x A) (tau :y B))
+         (inter (tau :x A) (tau :y C)))
+```
+
+inter-normal-form：
+
+```scheme
+(union (tau :x A :y B) (tau :x A :y C))
+= (union (inter (tau :x A) (tau :y B))
+         (inter (tau :x A) (tau :y C)))
+= (inter (union (inter (tau :x A) (tau :y B)) (tau :x A))
+         (union (inter (tau :x A) (tau :y B)) (tau :y C)))
+= (inter (inter (union (tau :x A) (tau :x A))
+                (union (tau :y B) (tau :x A)))
+         (inter (union (tau :x A) (tau :y C))
+                (union (tau :y B) (tau :y C))))
+= (inter (union (tau :x A) (tau :x A))
+         (union (tau :y B) (tau :x A))
+         (union (tau :x A) (tau :y C))
+         (union (tau :y B) (tau :y C)))
+= (inter (tau :x (union A A))
+         (union (tau :y B) (tau :x A))
+         (union (tau :x A) (tau :y C))
+         (tau :y (union B C)))
+```
+
+我们究竟要使用哪种 normal-form，可能取决于递归类型。
+
+已知递归类型的开头都是 union：
+
+```scheme
+(define-type my-int-list-t
+  (union 'nil (tau 'li int-t my-int-list-t)))
+
+(define-type (my-list-t A)
+  (union 'nil (tau 'li A (my-list-t A))))
+```
+
+那么改用哪种 normal-form 呢？
+
+可以都实现，然后实验。

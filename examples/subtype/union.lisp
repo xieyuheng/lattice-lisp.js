@@ -25,6 +25,11 @@
 ;;   (tau :id (union int-t string-t) :x int-t)
 ;;   (union (tau :id int-t :x int-t) (tau :id string-t :x int-t)))
 
+;; (assert-subtype
+;;   (inter (tau :id (union int-t string-t) (inter :x int-t)))
+;;   (union (inter (tau :id int-t) (tau :x int-t))
+;;          (inter (tau :id string-t) (tau :x int-t))))
+
 (assert-subtype
   (tau :id int-t :x int-t)
   (tau :id (union int-t string-t) :x (union int-t string-t)))

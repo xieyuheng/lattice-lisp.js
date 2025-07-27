@@ -1,6 +1,3 @@
-`assert-type-equal` -- test
-`assert-not-type-equal` -- test
-
 # tau*
 
 add `ListType` to `Type`

@@ -1,3 +1,4 @@
+import { recordMap } from "../../utils/record/recordMap.ts"
 import type { Type } from "../type/index.ts"
 
 export function formaType(type: Type): string {
@@ -48,7 +49,19 @@ export function formaType(type: Type): string {
 
     case "Tau": {
       const elementTypes = type.elementTypes.map(formaType)
-      return `(tau ${elementTypes.join(" ")})`
+      const attributeTypes = Object.entries(
+        recordMap(type.attributeTypes, formaType),
+      ).map(([key, type]) => `:${key} ${type}`)
+
+      if (elementTypes.length === 0) {
+        return `(tau ${attributeTypes.join(" ")})`
+      }
+
+      if (attributeTypes.length === 0) {
+        return `(tau ${elementTypes.join(" ")})`
+      }
+
+      return `(tau ${elementTypes.join(" ")} ${attributeTypes.join(" ")})`
     }
   }
 }

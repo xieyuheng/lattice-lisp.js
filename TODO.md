@@ -1,5 +1,3 @@
-`formaType` -- handle `Tau` well
-
 # union and inter
 
 > fail faster -- try the simple but maybe wrong solution first!

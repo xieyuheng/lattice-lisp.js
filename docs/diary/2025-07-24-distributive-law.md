@@ -209,4 +209,10 @@ inter-normal-form：
 
 那么改用哪种 normal-form 呢？
 
+- 可能不能是 union-normal-form，
+  因为我们不能把递归类型所带有的 union 提到最外面。
+  
+- 可能是需要 inter-normal-form，
+  因为这个过程中，其实是在一直把 union 往表达式内部推。
+
 可以都实现，然后实验。

@@ -23,6 +23,10 @@ export function checkSubtypeInCtx(
     return true
   }
 
+  if (targetType.kind === "ListType" && superType.kind === "ListType") {
+    return checkSubtypeInCtx(ctx, targetType.elementType, superType.elementType)
+  }
+
   if (targetType.kind === "Arrow" && superType.kind === "Arrow") {
     return (
       checkSubtypeInCtx(ctx, superType.argType, targetType.argType) &&

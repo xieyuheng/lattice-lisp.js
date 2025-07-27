@@ -56,23 +56,15 @@ export function checkSubtypeInCtx(
   }
 
   if (targetType.kind === "Union") {
-    for (const candidateType of targetType.candidateTypes) {
-      if (!checkSubtypeInCtx(ctx, candidateType, superType)) {
-        return false
-      }
-    }
-
-    return true
+    return targetType.candidateTypes.every((candidateType) =>
+      checkSubtypeInCtx(ctx, candidateType, superType),
+    )
   }
 
   if (superType.kind === "Union") {
-    for (const candidateType of superType.candidateTypes) {
-      if (checkSubtypeInCtx(ctx, targetType, candidateType)) {
-        return true
-      }
-    }
-
-    return false
+    return superType.candidateTypes.some((candidateType) =>
+      checkSubtypeInCtx(ctx, targetType, candidateType),
+    )
   }
 
   return false

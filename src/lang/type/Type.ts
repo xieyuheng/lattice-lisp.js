@@ -24,7 +24,7 @@ export type Inter = { kind: "Inter"; aspectTypes: Array<Type> }
 export type Tau = {
   kind: "Tau"
   elementTypes: Array<Type>
-  attrTypes: Record<string, Type>
+  attributeTypes: Record<string, Type>
   restType?: Type
 }
 
@@ -70,13 +70,13 @@ export function Inter(aspectTypes: Array<Type>): Inter {
 
 export function Tau(
   elementTypes: Array<Type>,
-  attrTypes: Record<string, Type>,
+  attributeTypes: Record<string, Type>,
   restType?: Type,
 ): Tau {
   return {
     kind: "Tau",
     elementTypes,
-    attrTypes,
+    attributeTypes,
     restType,
   }
 }

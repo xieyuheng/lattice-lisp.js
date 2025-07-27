@@ -35,13 +35,21 @@ export function checkSubtypeInCtx(
       return false
     }
 
-    for (const index of targetType.elementTypes.keys()) {
+    for (const index of superType.elementTypes.keys()) {
       const targetElementType = targetType.elementTypes[index]
       const superElementType = superType.elementTypes[index]
       if (!checkSubtypeInCtx(ctx, targetElementType, superElementType)) {
         return false
       }
     }
+
+    // for (const key of superType.attributeTypes.keys()) {
+    //   const targetAttrType = targetType.attributeTypes[index]
+    //   const superAttrType = superType.attributeTypes[index]
+    //   if (!checkSubtypeInCtx(ctx, targetElementType, superElementType)) {
+    //     return false
+    //   }
+    // }
 
     return true
   }

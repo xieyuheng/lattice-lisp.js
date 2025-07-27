@@ -1,6 +1,6 @@
-# attr
+# attribute
 
-`checkSubtype` -- `Tau` -- `attrTypes`
+`checkSubtypeInCtx` -- `Tau` -- `attributeTypes`
 
 # union and inter
 

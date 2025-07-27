@@ -1,6 +1,11 @@
 import { type Type } from "../type/index.ts"
 
-export type Stmt = AssertSubtype | AssertNotSubtype | AssertTypeEqual
+export type Stmt =
+  | AssertSubtype
+  | AssertNotSubtype
+  | AssertTypeEqual
+  | AssertNotTypeEqual
+
 export type AssertSubtype = { kind: "AssertSubtype"; lhs: Type; rhs: Type }
 export type AssertNotSubtype = {
   kind: "AssertNotSubtype"

@@ -2,7 +2,6 @@
 
 > fail faster -- try the simple but maybe wrong solution first!
 
-`checkSubtype` -- `Union`
 `checkSubtype` -- `Inter`
 
 # type check error report

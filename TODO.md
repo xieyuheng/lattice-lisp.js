@@ -1,7 +1,5 @@
-support `assert-type-not-equal` stmt
-
 `assert-type-equal` -- test
-`assert-type-not-equal` -- test
+`assert-not-type-equal` -- test
 
 # tau*
 

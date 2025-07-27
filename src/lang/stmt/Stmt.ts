@@ -8,6 +8,11 @@ export type AssertNotSubtype = {
   rhs: Type
 }
 export type AssertTypeEqual = { kind: "AssertTypeEqual"; lhs: Type; rhs: Type }
+export type AssertNotTypeEqual = {
+  kind: "AssertNotTypeEqual"
+  lhs: Type
+  rhs: Type
+}
 
 export function AssertSubtype(lhs: Type, rhs: Type): AssertSubtype {
   return {
@@ -28,6 +33,14 @@ export function AssertNotSubtype(lhs: Type, rhs: Type): AssertNotSubtype {
 export function AssertTypeEqual(lhs: Type, rhs: Type): AssertTypeEqual {
   return {
     kind: "AssertTypeEqual",
+    lhs,
+    rhs,
+  }
+}
+
+export function AssertNotTypeEqual(lhs: Type, rhs: Type): AssertNotTypeEqual {
+  return {
+    kind: "AssertNotTypeEqual",
     lhs,
     rhs,
   }

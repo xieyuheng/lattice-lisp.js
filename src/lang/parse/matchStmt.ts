@@ -15,4 +15,8 @@ const stmtMatcher: X.Matcher<Stmt> = X.matcherChoice<Stmt>([
   X.matcher("`(assert-not-subtype ,lhs ,rhs)", ({ lhs, rhs }) =>
     Stmts.AssertNotSubtype(matchType(lhs), matchType(rhs)),
   ),
+
+  X.matcher("`(assert-type-equal ,lhs ,rhs)", ({ lhs, rhs }) =>
+    Stmts.AssertTypeEqual(matchType(lhs), matchType(rhs)),
+  ),
 ])

@@ -1,6 +1,5 @@
-`checkEqualType` -- test equivalent relation -- by antisymmetry of subtyping
-support `assert-equal-type` stmt
-`assert-equal-type` -- test
+support `assert-type-equal` stmt
+`assert-type-equal` -- test
 
 # tau*
 

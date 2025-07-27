@@ -1,9 +1,11 @@
 # tau*
 
-add `ListType` to `Type`
+parse  `ListType`
 
 `typeMatcher` -- `tau*` -- support `restTypes`
-`checkSubtype` -- `Tau` -- `restTypes`
+
+`checkSubtype` -- `Tau` -- handle `Tau` as `restTypes`
+`checkSubtype` -- `Tau` -- handle `ListType` as `restTypes`
 
 # literal type
 

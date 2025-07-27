@@ -1,3 +1,5 @@
+(assert-type-equal (union string-t int-t) (union int-t string-t))
+
 (assert-subtype (inter int-t string-t) int-t)
 (assert-subtype (inter int-t string-t) string-t)
 (assert-not-subtype int-t (inter int-t string-t))

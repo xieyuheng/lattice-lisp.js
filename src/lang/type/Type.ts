@@ -6,6 +6,7 @@ export type Type =
   | StringType
   | IntType
   | FloatType
+  | ListType
   | Arrow
   | Union
   | Inter
@@ -18,6 +19,7 @@ export type BoolType = { kind: "BoolType" }
 export type StringType = { kind: "StringType" }
 export type IntType = { kind: "IntType" }
 export type FloatType = { kind: "FloatType" }
+export type ListType = { kind: "ListType"; elementType: Type }
 export type Arrow = { kind: "Arrow"; argType: Type; retType: Type }
 export type Union = { kind: "Union"; candidateTypes: Array<Type> }
 export type Inter = { kind: "Inter"; aspectTypes: Array<Type> }
@@ -54,6 +56,10 @@ export function IntType(): IntType {
 
 export function FloatType(): FloatType {
   return { kind: "FloatType" }
+}
+
+export function ListType(elementType: Type): ListType {
+  return { kind: "ListType", elementType }
 }
 
 export function Arrow(argType: Type, retType: Type): Arrow {

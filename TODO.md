@@ -1,7 +1,5 @@
 # tau*
 
-`typeMatcher` -- `tau*` -- support `restTypes`
-
 `checkSubtype` -- `Tau` -- handle `Tau` as `restTypes`
 `checkSubtype` -- `Tau` -- handle `ListType` as `restTypes`
 

@@ -38,5 +38,20 @@ const typeMatcher: X.Matcher<Type> = X.matcherChoice<Type>([
     ),
   ),
 
+  X.matcher("(cons 'tau* types)", ({ types }, { data, span }) => {
+    const allTypes = X.dataToArray(types).map(matchType)
+    if (allTypes.length === 0) {
+      throw new X.ParsingError(`tau* body should not be empty`, span)
+    }
+
+    const prefixTypes = allTypes.slice(0, allTypes.length - 1)
+    const restType = allTypes[allTypes.length - 1]
+    return Types.Tau(
+      prefixTypes,
+      recordMap(X.asTael(data).attributes, matchType),
+      restType,
+    )
+  }),
+
   X.matcher("name", ({ name }) => Types.TypeVar(X.dataToString(name))),
 ])

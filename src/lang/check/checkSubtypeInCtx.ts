@@ -67,5 +67,17 @@ export function checkSubtypeInCtx(
     )
   }
 
+  if (targetType.kind === "Inter") {
+    return targetType.aspectTypes.some((aspectType) =>
+      checkSubtypeInCtx(ctx, aspectType, superType),
+    )
+  }
+
+  if (superType.kind === "Inter") {
+    return superType.aspectTypes.every((aspectType) =>
+      checkSubtypeInCtx(ctx, targetType, aspectType),
+    )
+  }
+
   return false
 }

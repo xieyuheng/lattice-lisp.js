@@ -15,6 +15,8 @@ const typeMatcher: X.Matcher<Type> = X.matcherChoice<Type>([
   X.matcher("'int-t", () => Types.IntType()),
   X.matcher("'float-t", () => Types.FloatType()),
 
+  X.matcher("`(list-t ,type)", ({ type }) => Types.ListType(matchType(type))),
+
   X.matcher("(cons '-> types)", ({ types }) =>
     X.dataToArray(types)
       .map(matchType)

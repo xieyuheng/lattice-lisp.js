@@ -1,4 +1,5 @@
 import * as X from "@xieyuheng/x-data.js"
+import { recordMap } from "../../utils/record/recordMap.ts"
 import * as Types from "../type/index.ts"
 import { type Type } from "../type/index.ts"
 
@@ -28,8 +29,11 @@ const typeMatcher: X.Matcher<Type> = X.matcherChoice<Type>([
     Types.Inter(X.dataToArray(types).map(matchType)),
   ),
 
-  X.matcher("(cons 'tau types)", ({ types }) =>
-    Types.Tau(X.dataToArray(types).map(matchType), {}),
+  X.matcher("(cons 'tau types)", ({ types }, { data }) =>
+    Types.Tau(
+      X.dataToArray(types).map(matchType),
+      recordMap(X.asTael(data).attributes, matchType),
+    ),
   ),
 
   X.matcher("name", ({ name }) => Types.TypeVar(X.dataToString(name))),

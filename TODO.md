@@ -1,6 +1,5 @@
 # attr
 
-`typeMatcher` -- `tau` -- support `attrTypes`
 `checkSubtype` -- `Tau` -- `attrTypes`
 
 # union and inter

@@ -1,5 +1,5 @@
 import { checkSubtype, checkTypeEqual } from "../check/index.ts"
-import { formaType } from "../format/index.ts"
+import { formatType } from "../format/index.ts"
 import type { Mod } from "../mod/index.ts"
 import type { Stmt } from "../stmt/index.ts"
 
@@ -11,8 +11,8 @@ export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
 
     throw new Error(
       `[assert-subtype] fail:\n` +
-        `  lhs: ${formaType(stmt.lhs)}\n` +
-        `  rhs: ${formaType(stmt.rhs)}\n`,
+        `  lhs: ${formatType(stmt.lhs)}\n` +
+        `  rhs: ${formatType(stmt.rhs)}\n`,
     )
   }
 
@@ -23,8 +23,8 @@ export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
 
     throw new Error(
       `[assert-not-subtype] fail:\n` +
-        `  lhs: ${formaType(stmt.lhs)}\n` +
-        `  rhs: ${formaType(stmt.rhs)}`,
+        `  lhs: ${formatType(stmt.lhs)}\n` +
+        `  rhs: ${formatType(stmt.rhs)}`,
     )
   }
 
@@ -35,8 +35,8 @@ export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
 
     throw new Error(
       `[assert-type-equal] fail:\n` +
-        `  lhs: ${formaType(stmt.lhs)}\n` +
-        `  rhs: ${formaType(stmt.rhs)}\n`,
+        `  lhs: ${formatType(stmt.lhs)}\n` +
+        `  rhs: ${formatType(stmt.rhs)}\n`,
     )
   }
 
@@ -47,8 +47,8 @@ export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
 
     throw new Error(
       `[assert-not-type-equal] fail:\n` +
-        `  lhs: ${formaType(stmt.lhs)}\n` +
-        `  rhs: ${formaType(stmt.rhs)}\n`,
+        `  lhs: ${formatType(stmt.lhs)}\n` +
+        `  rhs: ${formatType(stmt.rhs)}\n`,
     )
   }
 }

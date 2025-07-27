@@ -1,6 +1,6 @@
 # tau*
 
-parse  `ListType`
+parse `ListType`
 
 `typeMatcher` -- `tau*` -- support `restTypes`
 

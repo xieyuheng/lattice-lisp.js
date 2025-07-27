@@ -1,1 +1,1 @@
-export * from "./formaType.ts"
+export * from "./formatType.ts"

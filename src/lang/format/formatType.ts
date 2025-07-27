@@ -1,7 +1,7 @@
 import { recordMap } from "../../utils/record/recordMap.ts"
 import type { Type } from "../type/index.ts"
 
-export function formaType(type: Type): string {
+export function formatType(type: Type): string {
   switch (type.kind) {
     case "TypeVar": {
       return type.name
@@ -31,26 +31,30 @@ export function formaType(type: Type): string {
       return "float-t"
     }
 
+    case "ListType": {
+      return `(list-t ${formatType(type.elementType)})`
+    }
+
     case "Arrow": {
-      const argType = formaType(type.argType)
-      const retType = formaType(type.retType)
+      const argType = formatType(type.argType)
+      const retType = formatType(type.retType)
       return `(-> ${argType} ${retType})`
     }
 
     case "Union": {
-      const candidateTypes = type.candidateTypes.map(formaType)
+      const candidateTypes = type.candidateTypes.map(formatType)
       return `(union ${candidateTypes.join(" ")})`
     }
 
     case "Inter": {
-      const aspectTypes = type.aspectTypes.map(formaType)
+      const aspectTypes = type.aspectTypes.map(formatType)
       return `(inter ${aspectTypes.join(" ")})`
     }
 
     case "Tau": {
-      const elementTypes = type.elementTypes.map(formaType)
+      const elementTypes = type.elementTypes.map(formatType)
       const attributeTypes = Object.entries(
-        recordMap(type.attributeTypes, formaType),
+        recordMap(type.attributeTypes, formatType),
       ).map(([key, type]) => `:${key} ${type}`)
 
       if (elementTypes.length === 0) {

@@ -1,6 +1,4 @@
-# attribute
-
-`checkSubtypeInCtx` -- `Tau` -- `attributeTypes`
+`formaType` -- handle `Tau` well
 
 # union and inter
 
@@ -32,4 +30,3 @@ add `ListType` to `Type`
 # format
 
 `formaType` -- handle `Arrow` well
-`formaType` -- handle `Tau` well

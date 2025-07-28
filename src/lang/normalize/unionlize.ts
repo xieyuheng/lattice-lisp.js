@@ -48,11 +48,21 @@ export function unionlize(type: Type): Type {
     const attributeTypes = recordMap(type.attributeTypes, unionlize)
     const restType = type.restType ? unionlize(type.restType) : undefined
     if (elementTypes.length === 0 && restType === undefined) {
-      const singleAttributeTaus = Object.entries(attributeTypes).map(
-        ([key, attributeType]) => Types.Tau([], { [key]: attributeType }),
+      const aspectTypes = Object.entries(attributeTypes).map(
+        ([key, attributeType]) => {
+          if (attributeType.kind === "Union") {
+            return Types.Union(
+              attributeType.candidateTypes.map((candidateType) =>
+                Types.Tau([], { [key]: candidateType }),
+              ),
+            )
+          } else {
+            return Types.Tau([], { [key]: attributeType })
+          }
+        },
       )
-      if (singleAttributeTaus.length === 1) return singleAttributeTaus[0]
-      return Types.Inter(singleAttributeTaus)
+      if (aspectTypes.length === 1) return aspectTypes[0]
+      return unionlize(Types.Inter(aspectTypes))
     } else {
       return Types.Tau(elementTypes, attributeTypes, restType)
     }

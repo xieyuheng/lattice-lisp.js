@@ -1,8 +1,6 @@
-`normalize/unionlize` -- union under tau should be pushed out
-`normalize/unionlize` -- handle union edge case
-
-`normalize/interlize`
+`normalize/interlize` -- setup
 `interlize` stmt -- for testing
+`normalize/interlize` -- `(union (tau)) => (tau (union))`
 
 # recursive type
 

@@ -1,4 +1,4 @@
-`normalize/unionlize` -- handle union under inter
+`normalize/unionlize` -- test union under inter
 `normalize/unionlize` -- handle `Tau`
 `normalize/unionlize` -- handle union edge case
 

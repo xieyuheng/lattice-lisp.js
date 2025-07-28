@@ -21,10 +21,21 @@ export function unionlize(type: Type): Type {
   }
 
   if (type.kind === "Inter") {
-    // There can not be union under inter.
-    // TODO handle union under inter
+    // (inter (union A B C) D E)
+    // =>
+    // (union (inter A D E)
+    //        (inter B D E)
+    //        (inter C D E))
     const aspectTypes = type.aspectTypes.map(unionlize)
-    return Types.Inter(aspectTypes)
+    const [nextUnion, remainingTypes] = pickNextUnion(aspectTypes)
+    if (!nextUnion) return Types.Inter(aspectTypes)
+    return unionlize(
+      Types.Union(
+        nextUnion.candidateTypes.map((candidateType) =>
+          unionlize(Types.Inter([candidateType, ...remainingTypes])),
+        ),
+      ),
+    )
   }
 
   if (type.kind === "Tau") {
@@ -40,9 +51,11 @@ export function unionlize(type: Type): Type {
   return type
 }
 
-function pickNextUnion(types: Array<Type>): [Type | undefined, Array<Type>] {
+function pickNextUnion(
+  types: Array<Type>,
+): [Types.Union | undefined, Array<Type>] {
   const remainingTypes = []
-  let nextUnion: Type | undefined = undefined
+  let nextUnion: Types.Union | undefined = undefined
   for (const type of types) {
     if (type.kind === "Union" && nextUnion === undefined) {
       nextUnion = type

@@ -1,4 +1,3 @@
-ambr checkTypeEqual typeEqual
 rename `check/` to `subtype/`
 
 `normalize/unionlize`

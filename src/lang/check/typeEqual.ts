@@ -1,6 +1,6 @@
 import { type Type } from "../type/index.ts"
 import { subtype } from "./subtype.ts"
 
-export function checkTypeEqual(lhs: Type, rhs: Type): boolean {
+export function typeEqual(lhs: Type, rhs: Type): boolean {
   return subtype(lhs, rhs) && subtype(rhs, lhs)
 }

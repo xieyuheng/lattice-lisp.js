@@ -1,2 +1,2 @@
-export * from "./checkTypeEqual.ts"
 export * from "./subtype.ts"
+export * from "./typeEqual.ts"

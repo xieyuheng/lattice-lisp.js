@@ -1,4 +1,3 @@
-`normalize/unionlize` -- union under inter -- keep the order
 `normalize/unionlize` -- handle `Tau`
 `normalize/unionlize` -- handle union edge case
 

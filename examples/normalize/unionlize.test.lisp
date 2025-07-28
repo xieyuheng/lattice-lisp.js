@@ -3,6 +3,7 @@
 (unionlize (tau :x (union (union float-t string-t) int-t)))
 
 (unionlize (inter (union float-t string-t) int-t))
+
 (unionlize
  (inter (union (tau :id int-t)
                (tau :id string-t))

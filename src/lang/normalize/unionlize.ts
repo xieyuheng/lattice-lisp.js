@@ -27,12 +27,14 @@ export function unionlize(type: Type): Type {
     //        (inter B D E)
     //        (inter C D E))
     const aspectTypes = type.aspectTypes.map(unionlize)
-    const [nextUnion, remainingTypes] = pickNextUnion(aspectTypes)
-    if (!nextUnion) return Types.Inter(aspectTypes)
+    const found = findNextUnion(aspectTypes)
+    if (!found) return Types.Inter(aspectTypes)
     return unionlize(
       Types.Union(
-        nextUnion.candidateTypes.map((candidateType) =>
-          unionlize(Types.Inter([candidateType, ...remainingTypes])),
+        found.target.candidateTypes.map((candidateType) =>
+          unionlize(
+            Types.Inter([...found.prefix, candidateType, ...found.postfix]),
+          ),
         ),
       ),
     )
@@ -51,18 +53,26 @@ export function unionlize(type: Type): Type {
   return type
 }
 
-function pickNextUnion(
-  types: Array<Type>,
-): [Types.Union | undefined, Array<Type>] {
-  const remainingTypes = []
-  let nextUnion: Types.Union | undefined = undefined
+type NextUnionResult = {
+  prefix: Array<Type>
+  target: Types.Union
+  postfix: Array<Type>
+}
+
+function findNextUnion(types: Array<Type>): undefined | NextUnionResult {
+  const prefix = []
+  const postfix = []
+  let target: Types.Union | undefined = undefined
   for (const type of types) {
-    if (type.kind === "Union" && nextUnion === undefined) {
-      nextUnion = type
+    if (!target && type.kind === "Union") {
+      target = type
+    } else if (!target) {
+      prefix.push(type)
     } else {
-      remainingTypes.push(type)
+      postfix.push(type)
     }
   }
 
-  return [nextUnion, remainingTypes]
+  if (target) return { prefix, target, postfix }
+  else undefined
 }

@@ -39,3 +39,17 @@ export function unionlize(type: Type): Type {
 
   return type
 }
+
+function pickNextUnion(types: Array<Type>): [Type | undefined, Array<Type>] {
+  const remainingTypes = []
+  let nextUnion: Type | undefined = undefined
+  for (const type of types) {
+    if (type.kind === "Union" && nextUnion === undefined) {
+      nextUnion = type
+    } else {
+      remainingTypes.push(type)
+    }
+  }
+
+  return [nextUnion, remainingTypes]
+}

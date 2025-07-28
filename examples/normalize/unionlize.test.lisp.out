@@ -5,3 +5,6 @@
 (union (inter (tau :id int-t) (tau :x int-t) (tau :y int-t) (tau :z int-t)) (inter (tau :id string-t) (tau :x int-t) (tau :y int-t) (tau :z int-t)))
 (union (inter (tau :x int-t) (tau :y int-t) (tau :z int-t) (tau :id int-t)) (inter (tau :x int-t) (tau :y int-t) (tau :z int-t) (tau :id string-t)))
 (union (inter (tau :id int-t) (tau :x int-t) (tau :y int-t) (tau :z int-t)) (inter (tau :id string-t) (tau :x int-t) (tau :y int-t) (tau :z int-t)))
+(inter (tau :id (union int-t string-t)) (tau :x int-t) (tau :y int-t) (tau :z int-t))
+(inter (tau :x int-t) (tau :y int-t) (tau :z int-t) (tau :id (union int-t string-t)))
+(inter (tau :id (union int-t string-t)) (tau :x int-t) (tau :y int-t) (tau :z int-t))

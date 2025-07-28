@@ -1,4 +1,4 @@
-`normalize/unionlize` -- handle `Tau`
+`normalize/unionlize` -- union under tau should be pushed out
 `normalize/unionlize` -- handle union edge case
 
 `normalize/interlize`

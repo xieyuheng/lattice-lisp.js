@@ -12,12 +12,9 @@ export function unionlize(type: Type): Type {
   }
 
   if (type.kind === "Union") {
-    return Types.Union(
-      type.candidateTypes.map(unionlize).flatMap((candidateType) => {
-        if (candidateType.kind === "Union") return candidateType.candidateTypes
-        else return [candidateType]
-      }),
-    )
+    const candidateTypes = flattenUnion(type.candidateTypes)
+    if (candidateTypes.length === 1) return candidateTypes[0]
+    return Types.Union(candidateTypes)
   }
 
   if (type.kind === "Inter") {
@@ -26,7 +23,8 @@ export function unionlize(type: Type): Type {
     // (union (inter A D E)
     //        (inter B D E)
     //        (inter C D E))
-    const aspectTypes = type.aspectTypes.map(unionlize)
+    const aspectTypes = flattenInter(type.aspectTypes)
+    if (aspectTypes.length === 1) return aspectTypes[0]
     const found = findNextUnion(aspectTypes)
     if (!found) return Types.Inter(aspectTypes)
     return unionlize(
@@ -41,16 +39,40 @@ export function unionlize(type: Type): Type {
   }
 
   if (type.kind === "Tau") {
-    // TODO multi attribute tau should be viewed as
-    // inter of single attribute taus.
-    return Types.Tau(
-      type.elementTypes.map(unionlize),
-      recordMap(type.attributeTypes, unionlize),
-      type.restType ? unionlize(type.restType) : undefined,
-    )
+    // (tau A B :x C :y D)
+    // =>
+    // (inter (tau A B)
+    //        (tau :x C)
+    //        (tau :y D))
+    const elementTypes = type.elementTypes.map(unionlize)
+    const attributeTypes = recordMap(type.attributeTypes, unionlize)
+    const restType = type.restType ? unionlize(type.restType) : undefined
+    if (elementTypes.length === 0 && restType === undefined) {
+      const singleAttributeTaus = Object.entries(attributeTypes).map(
+        ([key, attributeType]) => Types.Tau([], { [key]: attributeType }),
+      )
+      if (singleAttributeTaus.length === 1) return singleAttributeTaus[0]
+      return Types.Inter(singleAttributeTaus)
+    } else {
+      return Types.Tau(elementTypes, attributeTypes, restType)
+    }
   }
 
   return type
+}
+
+function flattenUnion(types: Array<Type>): Array<Type> {
+  return types.map(unionlize).flatMap((type) => {
+    if (type.kind === "Union") return type.candidateTypes
+    else return [type]
+  })
+}
+
+function flattenInter(types: Array<Type>): Array<Type> {
+  return types.map(unionlize).flatMap((type) => {
+    if (type.kind === "Inter") return type.aspectTypes
+    else return [type]
+  })
 }
 
 type NextUnionResult = {

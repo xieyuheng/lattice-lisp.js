@@ -18,6 +18,13 @@
         (union (tau :id int-t)
                (tau :id string-t))))
 
+(unionlize
+ (inter (union (tau :id int-t)
+               (tau :id string-t))
+        (tau :x int-t
+             :y int-t
+             :z int-t)))
+
 ;; TODO union under tau
 
 ;; (unionlize

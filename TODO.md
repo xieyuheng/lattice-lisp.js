@@ -1,5 +1,3 @@
-rename `check/` to `subtype/`
-
 `normalize/unionlize`
 
 `unionlize` stmt

@@ -1,7 +1,7 @@
-import { subtype, typeEqual } from "../check/index.ts"
 import { formatType } from "../format/index.ts"
 import type { Mod } from "../mod/index.ts"
 import type { Stmt } from "../stmt/index.ts"
+import { subtype, typeEqual } from "../subtype/index.ts"
 
 export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
   if (stmt.kind === "AssertSubtype") {

@@ -23,4 +23,8 @@ const stmtMatcher: X.Matcher<Stmt> = X.matcherChoice<Stmt>([
   X.matcher("`(assert-not-type-equal ,lhs ,rhs)", ({ lhs, rhs }) =>
     Stmts.AssertNotTypeEqual(matchType(lhs), matchType(rhs)),
   ),
+
+  X.matcher("`(unionlize ,type)", ({ type }) =>
+    Stmts.Unionlize(matchType(type)),
+  ),
 ])

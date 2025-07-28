@@ -1,5 +1,6 @@
 import { formatType } from "../format/index.ts"
 import type { Mod } from "../mod/index.ts"
+import { unionlize } from "../normalize/index.ts"
 import type { Stmt } from "../stmt/index.ts"
 import { subtype, typeEqual } from "../subtype/index.ts"
 
@@ -50,5 +51,10 @@ export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
         `  lhs: ${formatType(stmt.lhs)}\n` +
         `  rhs: ${formatType(stmt.rhs)}\n`,
     )
+  }
+
+  if (stmt.kind === "Unionlize") {
+    console.log(formatType(unionlize(stmt.type)))
+    return
   }
 }

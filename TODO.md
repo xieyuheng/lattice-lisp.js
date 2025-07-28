@@ -1,5 +1,3 @@
-`unionlize` stmt -- for testing
-
 `normalize/unionlize` -- handle union under inter
 `normalize/unionlize` -- handle `Tau`
 `normalize/unionlize` -- handle union edge case

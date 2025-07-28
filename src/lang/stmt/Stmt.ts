@@ -5,6 +5,7 @@ export type Stmt =
   | AssertNotSubtype
   | AssertTypeEqual
   | AssertNotTypeEqual
+  | Unionlize
 
 export type AssertSubtype = { kind: "AssertSubtype"; lhs: Type; rhs: Type }
 export type AssertNotSubtype = {
@@ -17,6 +18,10 @@ export type AssertNotTypeEqual = {
   kind: "AssertNotTypeEqual"
   lhs: Type
   rhs: Type
+}
+export type Unionlize = {
+  kind: "Unionlize"
+  type: Type
 }
 
 export function AssertSubtype(lhs: Type, rhs: Type): AssertSubtype {
@@ -48,5 +53,12 @@ export function AssertNotTypeEqual(lhs: Type, rhs: Type): AssertNotTypeEqual {
     kind: "AssertNotTypeEqual",
     lhs,
     rhs,
+  }
+}
+
+export function Unionlize(type: Type): Unionlize {
+  return {
+    kind: "Unionlize",
+    type,
   }
 }

@@ -1,9 +1,13 @@
 `normalize/interlize` -- `(union (inter)) => (inter (union))`
 `normalize/interlize` -- `(union (tau)) => (tau (union))`
 
-# recursive type
+# define type
 
-`define-type`
+add a kind of `Def`
+`define-type` stmt
+load handle `define-type`
+
+# recursive type
 
 `subtype` -- take `ctx.trail`
 `subtype` -- support recursive type

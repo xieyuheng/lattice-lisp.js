@@ -1,11 +1,11 @@
-import { checkSubtype, checkTypeEqual } from "../check/index.ts"
+import { checkTypeEqual, subtype } from "../check/index.ts"
 import { formatType } from "../format/index.ts"
 import type { Mod } from "../mod/index.ts"
 import type { Stmt } from "../stmt/index.ts"
 
 export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
   if (stmt.kind === "AssertSubtype") {
-    if (checkSubtype(stmt.lhs, stmt.rhs)) {
+    if (subtype(stmt.lhs, stmt.rhs)) {
       return
     }
 
@@ -17,7 +17,7 @@ export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
   }
 
   if (stmt.kind === "AssertNotSubtype") {
-    if (!checkSubtype(stmt.lhs, stmt.rhs)) {
+    if (!subtype(stmt.lhs, stmt.rhs)) {
       return
     }
 

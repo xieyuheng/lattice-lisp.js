@@ -1,8 +1,11 @@
-`normal-form/unionlize`
+ambr checkTypeEqual typeEqual
+rename `check/` to `subtype/`
+
+`normalize/unionlize`
 
 `unionlize` stmt
 
-`normal-form/interlize`
+`normalize/interlize`
 
 `interlize` stmt
 
@@ -10,8 +13,8 @@
 
 `define-type`
 
-`checkSubtype` -- take `ctx.trail`
-`checkSubtype` -- support recursive type
+`subtype` -- take `ctx.trail`
+`subtype` -- support recursive type
 
 # literal type
 
@@ -21,8 +24,8 @@ test ADT by literal string type
 
 # tau*
 
-`checkSubtype` -- `Tau` -- handle `Tau` as `restTypes`
-`checkSubtype` -- `Tau` -- handle `ListType` as `restTypes`
+`subtype` -- `Tau` -- handle `Tau` as `restTypes`
+`subtype` -- `Tau` -- handle `ListType` as `restTypes`
 
 # union and inter
 
@@ -30,7 +33,7 @@ fix edge cases.
 
 # type check error report
 
-`checkSubtype` -- has `ctx.history` and return `Report`
+`subtype` -- has `ctx.history` and return `Report`
 
 - for error report in `assert-subtype`
 

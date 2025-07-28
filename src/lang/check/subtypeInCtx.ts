@@ -1,7 +1,7 @@
 import { type Type } from "../type/index.ts"
 import { type Ctx } from "./Ctx.ts"
 
-export function checkSubtypeInCtx(
+export function subtypeInCtx(
   ctx: Ctx,
   targetType: Type,
   superType: Type,
@@ -24,13 +24,13 @@ export function checkSubtypeInCtx(
   }
 
   if (targetType.kind === "ListType" && superType.kind === "ListType") {
-    return checkSubtypeInCtx(ctx, targetType.elementType, superType.elementType)
+    return subtypeInCtx(ctx, targetType.elementType, superType.elementType)
   }
 
   if (targetType.kind === "Arrow" && superType.kind === "Arrow") {
     return (
-      checkSubtypeInCtx(ctx, superType.argType, targetType.argType) &&
-      checkSubtypeInCtx(ctx, targetType.retType, superType.retType)
+      subtypeInCtx(ctx, superType.argType, targetType.argType) &&
+      subtypeInCtx(ctx, targetType.retType, superType.retType)
     )
   }
 
@@ -42,7 +42,7 @@ export function checkSubtypeInCtx(
     for (const index of superType.elementTypes.keys()) {
       const targetElementType = targetType.elementTypes[index]
       const superElementType = superType.elementTypes[index]
-      if (!checkSubtypeInCtx(ctx, targetElementType, superElementType)) {
+      if (!subtypeInCtx(ctx, targetElementType, superElementType)) {
         return false
       }
     }
@@ -51,7 +51,7 @@ export function checkSubtypeInCtx(
       const targetAttributeType = targetType.attributeTypes[key]
       if (targetAttributeType === undefined) return false
       const superAttributeType = superType.attributeTypes[key]
-      if (!checkSubtypeInCtx(ctx, targetAttributeType, superAttributeType)) {
+      if (!subtypeInCtx(ctx, targetAttributeType, superAttributeType)) {
         return false
       }
     }
@@ -61,25 +61,25 @@ export function checkSubtypeInCtx(
 
   if (targetType.kind === "Union") {
     return targetType.candidateTypes.every((candidateType) =>
-      checkSubtypeInCtx(ctx, candidateType, superType),
+      subtypeInCtx(ctx, candidateType, superType),
     )
   }
 
   if (superType.kind === "Union") {
     return superType.candidateTypes.some((candidateType) =>
-      checkSubtypeInCtx(ctx, targetType, candidateType),
+      subtypeInCtx(ctx, targetType, candidateType),
     )
   }
 
   if (targetType.kind === "Inter") {
     return targetType.aspectTypes.some((aspectType) =>
-      checkSubtypeInCtx(ctx, aspectType, superType),
+      subtypeInCtx(ctx, aspectType, superType),
     )
   }
 
   if (superType.kind === "Inter") {
     return superType.aspectTypes.every((aspectType) =>
-      checkSubtypeInCtx(ctx, targetType, aspectType),
+      subtypeInCtx(ctx, targetType, aspectType),
     )
   }
 

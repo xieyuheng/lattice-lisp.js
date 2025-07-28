@@ -1,3 +1,6 @@
 (union int-t float-t string-t)
 (union float-t string-t int-t)
 (tau :x (union float-t string-t int-t))
+(union (inter float-t int-t) (inter string-t int-t))
+(union (inter (tau :id int-t) (tau :x int-t) (tau :y int-t) (tau :z int-t)) (inter (tau :id string-t) (tau :x int-t) (tau :y int-t) (tau :z int-t)))
+(union (inter (tau :id int-t) (tau :x int-t) (tau :y int-t) (tau :z int-t)) (inter (tau :id string-t) (tau :x int-t) (tau :y int-t) (tau :z int-t)))

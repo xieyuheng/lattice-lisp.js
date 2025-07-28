@@ -1,0 +1,3 @@
+(union int-t float-t string-t)
+(union float-t string-t int-t)
+(tau :x (union float-t string-t int-t))

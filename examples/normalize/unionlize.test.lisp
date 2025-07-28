@@ -2,7 +2,15 @@
 
 (unionlize (union int-t (union float-t string-t)))
 (unionlize (union (union float-t string-t) int-t))
+
 (unionlize (tau :x (union (union float-t string-t) int-t)))
+
+;; (inter (inter)) => (inter)
+
+(unionlize (inter int-t (inter float-t string-t)))
+(unionlize (inter (inter float-t string-t) int-t))
+
+(unionlize (tau :x (inter (inter float-t string-t) int-t)))
 
 ;; (inter (union)) => (union (inter))
 
@@ -30,8 +38,6 @@
              :z int-t)))
 
 ;; (tau (union)) => (union (tau))
-
-;; TODO fix the following cases:
 
 (unionlize
  (inter (tau :id (union int-t string-t))

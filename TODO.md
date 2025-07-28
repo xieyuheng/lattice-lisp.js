@@ -1,32 +1,10 @@
-> we need normal form for type
+`normal-form/unionlize`
 
-what kind of normal form to use?
+`unionlize` stmt
 
-- inter normal form
-- union normal form
+`normal-form/interlize`
 
-`checkSubtype` -- `Union` -- handle single attribute `Tau`
-
-# tau*
-
-`checkSubtype` -- `Tau` -- handle `Tau` as `restTypes`
-`checkSubtype` -- `Tau` -- handle `ListType` as `restTypes`
-
-# literal type
-
-[problem] how to include data in type?
-
-- as exp?
-- as value?
-- or a special format only for type?
-
-test ADT by literal string type
-
-# type check error report
-
-`checkSubtype` -- has `ctx.history` and return `Report`
-
-- for error report in `assert-subtype`
+`interlize` stmt
 
 # recursive type
 
@@ -35,9 +13,26 @@ test ADT by literal string type
 `checkSubtype` -- take `ctx.trail`
 `checkSubtype` -- support recursive type
 
+# literal type
+
+`Literal` -- has `data`
+
+test ADT by literal string type
+
+# tau*
+
+`checkSubtype` -- `Tau` -- handle `Tau` as `restTypes`
+`checkSubtype` -- `Tau` -- handle `ListType` as `restTypes`
+
 # union and inter
 
 fix edge cases.
+
+# type check error report
+
+`checkSubtype` -- has `ctx.history` and return `Report`
+
+- for error report in `assert-subtype`
 
 # format
 

@@ -1,10 +1,11 @@
-`normalize/unionlize`
+`unionlize` stmt -- for testing
 
-`unionlize` stmt
+`normalize/unionlize` -- handle union under inter
+`normalize/unionlize` -- handle `Tau`
+`normalize/unionlize` -- handle union edge case
 
 `normalize/interlize`
-
-`interlize` stmt
+`interlize` stmt -- for testing
 
 # recursive type
 

@@ -19,7 +19,7 @@ export function unionlize(type: Type): Type {
 
   if (type.kind === "Inter") {
     // (inter (union)) => (union (inter))
-    // for example:
+
     // (inter (union A B C) D E)
     // =>
     // (union (inter A D E)
@@ -43,7 +43,7 @@ export function unionlize(type: Type): Type {
 
   if (type.kind === "Tau") {
     // (tau A ...) => (inter (tau A) ...)
-    // for example:
+
     // (tau A B :x C :y D)
     // =>
     // (inter (tau A B)

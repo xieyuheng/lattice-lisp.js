@@ -1,4 +1,3 @@
-`interlize` stmt -- for testing
 `normalize/interlize` -- test nested inter and union
 `normalize/interlize` -- `(union (inter)) => (inter (union))`
 `normalize/interlize` -- `(union (tau)) => (tau (union))`

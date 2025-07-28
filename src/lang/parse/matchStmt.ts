@@ -27,4 +27,8 @@ const stmtMatcher: X.Matcher<Stmt> = X.matcherChoice<Stmt>([
   X.matcher("`(unionlize ,type)", ({ type }) =>
     Stmts.Unionlize(matchType(type)),
   ),
+
+  X.matcher("`(interlize ,type)", ({ type }) =>
+    Stmts.Interlize(matchType(type)),
+  ),
 ])

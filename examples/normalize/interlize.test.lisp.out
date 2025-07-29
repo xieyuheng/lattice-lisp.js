@@ -6,4 +6,3 @@
 (tau :x (inter (inter float-t string-t) int-t))
 (inter (union float-t int-t) (union string-t int-t))
 (inter (union (tau :x int-t) (tau :x float-t)) (union (tau :x int-t) (tau :y float-t)) (union (tau :y int-t) (tau :x float-t)) (union (tau :y int-t) (tau :y float-t)))
-(inter (union (tau :x int-t) (tau :x float-t)) (union (tau :x int-t) (tau :y float-t)) (union (tau :y int-t) (tau :x float-t)) (union (tau :y int-t) (tau :y float-t)))

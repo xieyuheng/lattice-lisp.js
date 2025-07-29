@@ -22,7 +22,6 @@ export function unionlize(type: Type): Type {
     // (inter (inter)) => (inter)
     const aspectTypes = flattenInter(type.aspectTypes)
     if (aspectTypes.length === 1) return aspectTypes[0]
-
     // (inter (union)) => (union (inter))
     // (inter (union A B C) D E)
     // =>

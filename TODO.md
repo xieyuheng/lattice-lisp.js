@@ -1,4 +1,3 @@
-`normalize/interlize` -- `(union (inter)) => (inter (union))`
 `normalize/interlize` -- `(union (tau)) => (tau (union))`
 
 # define type

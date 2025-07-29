@@ -16,5 +16,10 @@
 
 ;; (union (inter)) => (inter (union))
 
-;; TODO fix the following case
 (interlize (union (inter float-t string-t) int-t))
+
+(interlize
+ (union (inter (tau :x int-t)
+               (tau :y int-t))
+        (inter (tau :x float-t)
+               (tau :y float-t))))

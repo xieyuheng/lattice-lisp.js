@@ -14,7 +14,18 @@ export function interlize(type: Type): Type {
     // (union (union)) => (union)
     const candidateTypes = flattenUnion(type.candidateTypes)
     if (candidateTypes.length === 1) return candidateTypes[0]
-    return Types.Union(candidateTypes)
+    // (union (inter)) => (inter (union))
+    const found = findNextInter(candidateTypes)
+    if (!found) return Types.Union(candidateTypes)
+    return interlize(
+      Types.Inter(
+        found.target.aspectTypes.map((aspectType) =>
+          interlize(
+            Types.Union([...found.prefix, aspectType, ...found.postfix]),
+          ),
+        ),
+      ),
+    )
   }
 
   if (type.kind === "Inter") {
@@ -41,4 +52,28 @@ function flattenInter(types: Array<Type>): Array<Type> {
     if (type.kind === "Inter") return type.aspectTypes
     else return [type]
   })
+}
+
+type NextInterResult = {
+  prefix: Array<Type>
+  target: Types.Inter
+  postfix: Array<Type>
+}
+
+function findNextInter(types: Array<Type>): undefined | NextInterResult {
+  const prefix = []
+  const postfix = []
+  let target: Types.Inter | undefined = undefined
+  for (const type of types) {
+    if (!target && type.kind === "Inter") {
+      target = type
+    } else if (!target) {
+      prefix.push(type)
+    } else {
+      postfix.push(type)
+    }
+  }
+
+  if (target) return { prefix, target, postfix }
+  else undefined
 }

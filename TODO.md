@@ -2,6 +2,10 @@
 
 > fail faster -- try the simple but maybe wrong solution first!
 
+[maybe] still implement `assert-subtype` for finite types as a practice.
+
+# original plan
+
 (1) finite structural type
 (2) recursive structural type
 (2) recursive structural type + polymorphism

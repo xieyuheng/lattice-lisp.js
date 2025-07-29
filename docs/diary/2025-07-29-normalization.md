@@ -105,18 +105,27 @@ interlize 可以把 type 化为 `(inter (union))` 的矩阵，比如：
 但是 infinite tree + trail 的算法，
 应该是只和简单的就 tree 的结构的递归判断相容。
 使用 normalization 获得矩阵再用集合论的概念来判断，
-就没法用 infinite tree + trail 了。
+就没法用 infinite tree + trail 了，
+因为当遇到一个递归点的时候，
+没法确定应该把什么记录在 trail 中。
 
 难道说带有递归的 structural type 的项目失败了？
 
 可能需要退一步：
 
 - 退路 A：放弃 structural type。
+
 - 退路 B：保持 structural type，
   但是不再使用自由的 union 和 inter：
   - 把 tau 作为特殊的 inter，
   - 把 variant 作为特殊的 union。
 
+- 前进 C：继续尝试解决现在遇到的问题，
+  比如学习 tree automata。
+  infinite tree + trail 的 idea 是不充分的，需要新的 idea。
+
 但是不论 A 还是 B，
 这个项目都不能叫做 lattice-lisp 了，
 因为 lattice 就来自 union 和 inter。
+如果选 B，可能可以叫做 meta-lisp，
+并且可以学习 LCF。

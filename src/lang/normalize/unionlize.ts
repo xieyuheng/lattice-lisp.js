@@ -67,7 +67,7 @@ export function unionlize(type: Type): Type {
 
 function createSingleAttributeType(key: string, attributeType: Type): Type {
   if (attributeType.kind === "Union") {
-    // (tau (union)) => (union (tau))
+    // (tau :key (union T)) => (union (tau :key T))
     return Types.Union(
       attributeType.candidateTypes.map((candidateType) =>
         Types.Tau([], { [key]: candidateType }),

@@ -1,3 +1,4 @@
+import { recordMap } from "../../utils/record/recordMap.ts"
 import * as Types from "../type/index.ts"
 import { type Type } from "../type/index.ts"
 
@@ -35,9 +36,41 @@ export function interlize(type: Type): Type {
     return Types.Inter(aspectTypes)
   }
 
-  // TODO
+  if (type.kind === "Tau") {
+    // (tau A ...) => (inter (tau A) ...)
+    // (tau A B :x C :y D)
+    // =>
+    // (inter (tau A B)
+    //        (tau :x C)
+    //        (tau :y D))
+    const elementTypes = type.elementTypes.map(interlize)
+    const attributeTypes = recordMap(type.attributeTypes, interlize)
+    const restType = type.restType ? interlize(type.restType) : undefined
+    if (elementTypes.length === 0 && restType === undefined) {
+      const aspectTypes = Object.entries(attributeTypes).map(
+        ([key, attributeType]) => createSingleAttributeType(key, attributeType),
+      )
+      if (aspectTypes.length === 1) return aspectTypes[0]
+      return interlize(Types.Inter(aspectTypes))
+    } else {
+      return Types.Tau(elementTypes, attributeTypes, restType)
+    }
+  }
 
   return type
+}
+
+function createSingleAttributeType(key: string, attributeType: Type): Type {
+  if (attributeType.kind === "Inter") {
+    // (tau :key (inter T)) => (inter (tau :key T))
+    return Types.Inter(
+      attributeType.aspectTypes.map((aspectType) =>
+        Types.Tau([], { [key]: aspectType }),
+      ),
+    )
+  } else {
+    return Types.Tau([], { [key]: attributeType })
+  }
 }
 
 function flattenUnion(types: Array<Type>): Array<Type> {

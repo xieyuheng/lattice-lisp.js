@@ -1,5 +1,3 @@
-`normalize/interlize` -- `(union (tau)) => (tau (union))`
-
 # define type
 
 add a kind of `Def`

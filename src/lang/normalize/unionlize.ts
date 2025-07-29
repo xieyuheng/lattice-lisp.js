@@ -12,22 +12,23 @@ export function unionlize(type: Type): Type {
   }
 
   if (type.kind === "Union") {
+    // (union (union)) => (union)
     const candidateTypes = flattenUnion(type.candidateTypes)
     if (candidateTypes.length === 1) return candidateTypes[0]
     return Types.Union(candidateTypes)
   }
 
   if (type.kind === "Inter") {
-    // (inter (union)) => (union (inter))
+    // (inter (inter)) => (inter)
+    const aspectTypes = flattenInter(type.aspectTypes)
+    if (aspectTypes.length === 1) return aspectTypes[0]
 
+    // (inter (union)) => (union (inter))
     // (inter (union A B C) D E)
     // =>
     // (union (inter A D E)
     //        (inter B D E)
     //        (inter C D E))
-
-    const aspectTypes = flattenInter(type.aspectTypes)
-    if (aspectTypes.length === 1) return aspectTypes[0]
     const found = findNextUnion(aspectTypes)
     if (!found) return Types.Inter(aspectTypes)
     return unionlize(
@@ -43,13 +44,11 @@ export function unionlize(type: Type): Type {
 
   if (type.kind === "Tau") {
     // (tau A ...) => (inter (tau A) ...)
-
     // (tau A B :x C :y D)
     // =>
     // (inter (tau A B)
     //        (tau :x C)
     //        (tau :y D))
-
     const elementTypes = type.elementTypes.map(unionlize)
     const attributeTypes = recordMap(type.attributeTypes, unionlize)
     const restType = type.restType ? unionlize(type.restType) : undefined
@@ -81,7 +80,6 @@ function createSingleAttributeType(key: string, attributeType: Type): Type {
 }
 
 function flattenUnion(types: Array<Type>): Array<Type> {
-  // (union (union)) => (union)
   return types.map(unionlize).flatMap((type) => {
     if (type.kind === "Union") return type.candidateTypes
     else return [type]
@@ -89,7 +87,6 @@ function flattenUnion(types: Array<Type>): Array<Type> {
 }
 
 function flattenInter(types: Array<Type>): Array<Type> {
-  // (inter (inter)) => (inter)
   return types.map(unionlize).flatMap((type) => {
     if (type.kind === "Inter") return type.aspectTypes
     else return [type]

@@ -73,9 +73,18 @@ function createSingleAttributeType(key: string, attributeType: Type): Type {
         Types.Tau([], { [key]: candidateType }),
       ),
     )
-  } else {
-    return Types.Tau([], { [key]: attributeType })
   }
+
+  if (attributeType.kind === "Inter") {
+    // (tau :key (inter T)) => (inter (tau :key T))
+    return Types.Inter(
+      attributeType.aspectTypes.map((aspectType) =>
+        Types.Tau([], { [key]: aspectType }),
+      ),
+    )
+  }
+
+  return Types.Tau([], { [key]: attributeType })
 }
 
 function flattenUnion(types: Array<Type>): Array<Type> {

@@ -61,6 +61,15 @@ export function interlize(type: Type): Type {
 }
 
 function createSingleAttributeType(key: string, attributeType: Type): Type {
+  if (attributeType.kind === "Union") {
+    // (tau :key (union T)) => (union (tau :key T))
+    return Types.Union(
+      attributeType.candidateTypes.map((candidateType) =>
+        Types.Tau([], { [key]: candidateType }),
+      ),
+    )
+  }
+
   if (attributeType.kind === "Inter") {
     // (tau :key (inter T)) => (inter (tau :key T))
     return Types.Inter(
@@ -68,9 +77,9 @@ function createSingleAttributeType(key: string, attributeType: Type): Type {
         Types.Tau([], { [key]: aspectType }),
       ),
     )
-  } else {
-    return Types.Tau([], { [key]: attributeType })
   }
+
+  return Types.Tau([], { [key]: attributeType })
 }
 
 function flattenUnion(types: Array<Type>): Array<Type> {

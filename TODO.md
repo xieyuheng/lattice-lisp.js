@@ -1,3 +1,17 @@
+# project failed
+
+> fail faster -- try the simple but maybe wrong solution first!
+
+(1) finite structural type
+(2) recursive structural type
+(2) recursive structural type + polymorphism
+
+- use lattice-lisp as the denotational semantics of lattice-lisp, specially for type system
+  - maybe use explicit substitution for runtime semantics
+- use the idea of combinators -- by putting env and ctx to the last currying argument position.
+- use the idea of propagator model to implement type system.
+- implement `not` as type operator, which is needed to view pattern in pattern matching as type.
+
 # define type
 
 add a kind of `Def`

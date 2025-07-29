@@ -129,3 +129,35 @@ interlize 可以把 type 化为 `(inter (union))` 的矩阵，比如：
 因为 lattice 就来自 union 和 inter。
 如果选 B，可能可以叫做 meta-lisp，
 并且可以学习 LCF。
+
+可以用一种简化的 `define-datatype`：
+
+```scheme
+(define-datatype (my-list-t A)
+  (nil)
+  (li A (list-t A)))
+```
+
+而不是 dependent type 才需要的复杂语法：
+
+```scheme
+(define-datatype (my-list-t A)
+  (nil () (my-list-t A))
+  (li ((head A) (tail (my-list-t A))) (my-list-t A)))
+```
+
+但是是否允许 `nil` 和 `li` 作为 data constructor 呢？
+如果允许这还是 structural type 吗？
+
+```scheme
+(li 1 (nil))    ;; not structural
+['li 1 ['nil]]  ;; one way to be pure structural
+```
+
+感觉前者才是正确的，
+这让人想要放弃 structural type，
+也就是回到 2025-06-01-on-syntax.md，
+用「overload 函数作用语法」的方式处理 data constructor。
+另外只是保留 record type 和因为 record type 所带来的子类型关系。
+
+现在是时候读 LCF 相关的论文了。

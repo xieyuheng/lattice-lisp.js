@@ -108,3 +108,15 @@ interlize 可以把 type 化为 `(inter (union))` 的矩阵，比如：
 就没法用 infinite tree + trail 了。
 
 难道说带有递归的 structural type 的项目失败了？
+
+可能需要退一步：
+
+- 退路 A：放弃 structural type。
+- 退路 B：保持 structural type，
+  但是不再使用自由的 union 和 inter：
+  - 把 tau 作为特殊的 inter，
+  - 把 variant 作为特殊的 union。
+
+但是不论 A 还是 B，
+这个项目都不能叫做 lattice-lisp 了，
+因为 lattice 就来自 union 和 inter。

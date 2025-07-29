@@ -23,8 +23,8 @@
                (tau :y float-t))))
 
 (interlize
- (union (inter (tau :x int-t :y int-t))
-        (inter (tau :x float-t :y float-t))))
+ (union (tau :x int-t :y int-t)
+        (tau :x float-t :y float-t)))
 
 ;; (tau (inter)) => (inter (tau))
 

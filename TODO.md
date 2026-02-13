@@ -2,6 +2,18 @@
 
 > fail faster -- try the simple but maybe wrong solution first!
 
+为什么 `unionlize(targetType)` 和 `interlize(superType)` 是正确的？
+
+- 两边都 `unionlize` 也可以。
+- 两边都 `interlize` 也可以。
+- 左边 `interlize` 右边 `unionlize` 不行。
+
+```typescript
+export function subtype(targetType: Type, superType: Type): boolean {
+  return subtypeInCtx(emptyCtx(), unionlize(targetType), interlize(superType))
+}
+```
+
 # original plan
 
 (1) finite structural type

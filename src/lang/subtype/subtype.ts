@@ -1,5 +1,4 @@
-import { interlize } from "../normalize/index.ts"
-import { unionlize } from "../normalize/index.ts"
+import { interlize, unionlize } from "../normalize/index.ts"
 import { type Type } from "../type/index.ts"
 import { emptyCtx } from "./Ctx.ts"
 import { subtypeInCtx } from "./subtypeInCtx.ts"

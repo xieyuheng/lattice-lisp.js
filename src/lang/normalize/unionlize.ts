@@ -50,15 +50,14 @@ export function unionlize(type: Type): Type {
     //        (tau :y D))
     const elementTypes = type.elementTypes.map(unionlize)
     const attributeTypes = recordMap(type.attributeTypes, unionlize)
-    const restType = type.restType ? unionlize(type.restType) : undefined
-    if (elementTypes.length === 0 && restType === undefined) {
+    if (elementTypes.length === 0) {
       const aspectTypes = Object.entries(attributeTypes).map(
         ([key, attributeType]) => createSingleAttributeType(key, attributeType),
       )
       if (aspectTypes.length === 1) return aspectTypes[0]
       return unionlize(Types.Inter(aspectTypes))
     } else {
-      return Types.Tau(elementTypes, attributeTypes, restType)
+      return Types.Tau(elementTypes, attributeTypes)
     }
   }
 

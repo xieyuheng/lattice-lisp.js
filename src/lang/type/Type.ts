@@ -27,7 +27,6 @@ export type Tau = {
   kind: "Tau"
   elementTypes: Array<Type>
   attributeTypes: Record<string, Type>
-  restType?: Type
 }
 
 export function TypeVar(name: string): TypeVar {
@@ -77,12 +76,10 @@ export function Inter(aspectTypes: Array<Type>): Inter {
 export function Tau(
   elementTypes: Array<Type>,
   attributeTypes: Record<string, Type>,
-  restType?: Type,
 ): Tau {
   return {
     kind: "Tau",
     elementTypes,
     attributeTypes,
-    restType,
   }
 }

@@ -1,4 +1,6 @@
-import { type Type } from "../type/index.ts"
+import { interlize, unionlize } from "../normalize/index.ts"
+import * as Types from "../type/index.ts"
+import { type Tau, type Type } from "../type/index.ts"
 import { type Ctx } from "./Ctx.ts"
 
 export function subtypeInCtx(
@@ -6,6 +8,14 @@ export function subtypeInCtx(
   targetType: Type,
   superType: Type,
 ): boolean {
+  if (targetType.kind === "Tau" && !tauIsGenerator(targetType)) {
+    targetType = interlizeTau(targetType)
+  }
+
+  if (superType.kind === "Tau" && !tauIsGenerator(superType)) {
+    superType = interlizeTau(superType)
+  }
+
   if (targetType.kind === "NothingType") {
     return true
   }
@@ -100,4 +110,42 @@ export function subtypeInCtx(
   }
 
   return false
+}
+
+function tauIsGenerator(tau: Tau): boolean {
+  if (Object.keys(tau.attributeTypes).length === 0) {
+    return true
+  }
+
+  if (
+    Object.keys(tau.attributeTypes).length === 1 &&
+    tau.elementTypes.length === 0
+  ) {
+    return true
+  }
+
+  return false
+}
+
+function interlizeTau(tau: Tau): Type {
+  // (tau A ...) => (inter (tau A) ...)
+  // (tau A B :x C :y D)
+  // =>
+  // (inter (tau A B)
+  //        (tau :x C)
+  //        (tau :y D))
+
+  const aspectTypes = Object.entries(tau.attributeTypes).map(
+    ([key, attributeType]) => Types.Tau([], { [key]: attributeType }),
+  )
+
+  if (tau.elementTypes.length !== 0) {
+    aspectTypes.push(Types.Tau(tau.elementTypes, {}))
+  }
+
+  if (aspectTypes.length === 1) {
+    return aspectTypes[0]
+  } else {
+    return Types.Inter(aspectTypes)
+  }
 }

@@ -45,15 +45,14 @@ export function interlize(type: Type): Type {
     //        (tau :y D))
     const elementTypes = type.elementTypes.map(interlize)
     const attributeTypes = recordMap(type.attributeTypes, interlize)
-    const restType = type.restType ? interlize(type.restType) : undefined
-    if (elementTypes.length === 0 && restType === undefined) {
+    if (elementTypes.length === 0) {
       const aspectTypes = Object.entries(attributeTypes).map(
         ([key, attributeType]) => createSingleAttributeType(key, attributeType),
       )
       if (aspectTypes.length === 1) return aspectTypes[0]
       return interlize(Types.Inter(aspectTypes))
     } else {
-      return Types.Tau(elementTypes, attributeTypes, restType)
+      return Types.Tau(elementTypes, attributeTypes)
     }
   }
 

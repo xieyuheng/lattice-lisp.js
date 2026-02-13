@@ -1,4 +1,3 @@
-import { ParsingError } from "@xieyuheng/x-data.js"
 import fs from "node:fs"
 import { createMod, type Mod } from "../mod/index.ts"
 import { parseStmts } from "../parse/index.ts"

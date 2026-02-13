@@ -28,5 +28,7 @@
 
 ;; (tau (inter)) => (inter (tau))
 
+(interlize (tau :x int-t :y float-t))
+
 (interlize
  (tau :point (inter (tau :x int-t) (tau :y int-t))))

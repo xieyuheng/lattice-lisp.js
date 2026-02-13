@@ -13,11 +13,9 @@
   (tau :x int-t :y int-t)
   (inter (tau :x int-t) (tau :y int-t)))
 
-;; TODO should pass:
-
-;; (assert-subtype
-;;   (inter (tau :x int-t) (tau :y int-t))
-;;   (tau :x int-t :y int-t))
+(assert-subtype
+  (inter (tau :x int-t) (tau :y int-t))
+  (tau :x int-t :y int-t))
 
 (assert-subtype
   (tau :x int-t :y int-t :z int-t)

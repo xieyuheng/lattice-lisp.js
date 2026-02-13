@@ -60,27 +60,43 @@ export function subtypeInCtx(
   }
 
   if (targetType.kind === "Union") {
-    return targetType.candidateTypes.every((candidateType) =>
-      subtypeInCtx(ctx, candidateType, superType),
-    )
-  }
-
-  if (superType.kind === "Union") {
-    return superType.candidateTypes.some((candidateType) =>
-      subtypeInCtx(ctx, targetType, candidateType),
-    )
-  }
-
-  if (targetType.kind === "Inter") {
-    return targetType.aspectTypes.some((aspectType) =>
-      subtypeInCtx(ctx, aspectType, superType),
-    )
+    if (
+      targetType.candidateTypes.every((candidateType) =>
+        subtypeInCtx(ctx, candidateType, superType),
+      )
+    ) {
+      return true
+    }
   }
 
   if (superType.kind === "Inter") {
-    return superType.aspectTypes.every((aspectType) =>
-      subtypeInCtx(ctx, targetType, aspectType),
-    )
+    if (
+      superType.aspectTypes.every((aspectType) =>
+        subtypeInCtx(ctx, targetType, aspectType),
+      )
+    ) {
+      return true
+    }
+  }
+
+  if (superType.kind === "Union") {
+    if (
+      superType.candidateTypes.some((candidateType) =>
+        subtypeInCtx(ctx, targetType, candidateType),
+      )
+    ) {
+      return true
+    }
+  }
+
+  if (targetType.kind === "Inter") {
+    if (
+      targetType.aspectTypes.some((aspectType) =>
+        subtypeInCtx(ctx, aspectType, superType),
+      )
+    ) {
+      return true
+    }
   }
 
   return false
